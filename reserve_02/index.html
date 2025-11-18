@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <link href="reserve.css" rel="stylesheet" type="text/css" media="all">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    	<script src="jstest.js"></script>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="checkout.js" defer></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>チケット購入 | う潮</title>
+  </head>
+  <body>
+    <header>
+      <div class="headlogo tatenaga">
+        <a href="index.html">
+          <img src="う潮ロゴ単体_top.png" class="toplogo">
+        </a>
+      </div>
+      <div class="headlogo yokonaga">
+        <a href="index.html">
+          <img src="う潮ロゴ単体_top.png" class="toplogo">
+        </a>
+      </div>
+    
+      <div class="hamburger-menu">
+          <input type="checkbox" id="menu-btn-check">
+          <label for="menu-btn-check" class="menu-btn"><span></span></label>
+          <!--ここからメニュー-->
+          <div class="menu-content">
+              <ul>
+                  <li class="pcnaga">
+                    <div class="headlogo">
+                      <a href="../index.html">
+                        <img src="う潮ロゴ単体_top.png" class="toplogo">
+                      </a>
+                    </div>
+                  </li>
+                  <li class="tatenaga">
+                      <a href="../index.html" class="return">TOP</a>
+                  </li>
+                  <li class="yokonaga">
+                    <a href="../index.html" class="return">TOP</a>
+                  </li>
+                  <li>
+                      <a href="../about.html">About</a>
+                  </li>
+                  <li>
+                      <a href="../news.html">News</a>
+                  </li>
+                  <li>
+                      <a href="../archives.html">Archives</a>
+                  </li>
+                  <li>
+                      <a href="../contact.html">Contact</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </header>
+
+    <div class="ushiotop pcnaga">
+      <img src="ushiotop.jpg" class="ushiotop">
+    </div>
+
+    <div class="pckiji">
+      <h1>Reserve</h1>
+      
+      <div class="square2">
+        <a href="疾走　本表.jpg" target="_blank"><img src="疾走　本表.jpg" class="squarephoto"></a>
+      </div>
+
+      <div class="centertext">
+        <h3>料金</h3>
+        <p>一般：3,000円
+          <br>U-22：2,500円
+          <br>応援チケット(特典つき)：5,000円
+        </p>
+
+        <p>予約受付は公演前日の24時までとなっております。
+          <br>当日券情報については各SNSにてお知らせいたします。
+        </p>
+
+      <h3>事前決済</h3>
+
+        <p>当公演では受付での混雑を避けスムーズに入場していただくため、
+          <br>事前決済でのチケット購入をおすすめしております。
+        </p>
+
+        <p>Stripe決済システムにてお買い求めください。
+          <br>クレジットカード・Apple Pay・Google Payが利用可能です。
+        </p>
+
+        <p>Stripeからの領収書発行をもって、ご予約完了とさせていただきます。
+          <br>領収書発行メールは、公演当日まで保管頂きますようお願いいたします。
+        </p>
+
+        <p class="attention">システムの都合上、既に全チケットが1枚ずつカートに入っております。
+          <br>大変お手数をおかけしますが、
+          <br>「詳細」よりご自身で必要な枚数に変更のうえ、お買い求めください。
+        </p>
+
+        <script async
+  src="buy-button.js" style="width: 30vw;">
+</script>
+
+<stripe-buy-button
+  buy-button-id="buy_btn_1PZa6N2KEi469SSHLHnr5bYZ"
+  publishable-key="pk_live_51PBV3w2KEi469SSHBrjbtUdecTZXUT2HJ1wTtrEC4ECaZ1QXkju5JQV31bdSITC4Urj1BrYZDKIIc7HiGUKzZc6c00ZFO1y3yK"
+>
+</stripe-buy-button>
+
+      <h3>当日精算</h3>
+
+      <p>以下のフォームに必要事項を記入ください。
+        <br>ご予約は公演前日の24時まで受け付けております。
+      </p>
+
+      <p><a href="https://ticket.corich.jp/apply/328645/">https://ticket.corich.jp/apply/328645/</a></p>
+
+    </div>
+
+    <script src="reserve.js"></script>
+  </body>
+</html>
