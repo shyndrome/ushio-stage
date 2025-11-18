@@ -1,0 +1,646 @@
+body {
+    margin: 0 auto;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    letter-spacing: 0.25vw;
+    color: #444;
+    background-image: url("背景用テクスチャ03.jpg");
+    background-size: cover;
+}
+
+header {
+    text-align: center;
+}
+
+:root {
+    --blue01-color: #6e9ac1;
+    --blue02-color: #45A3F4;
+}
+
+/*縦長、スマホ対応*/
+@media only screen and (max-width: 480px) {
+    .pcnaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+    
+    .toplogo {
+        width: 20vw;
+        margin: 2.5vw 0;
+    }
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 6vw;
+    }
+    
+    .contactlogo {
+        width: 30vw;
+    }
+    
+    .contactmail {
+        text-align: center;
+    }
+    
+    a {
+        color: #444;
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 16px;
+        right: 12px;
+        display: flex;
+        height: 32px;
+        width: 32px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        background-color: var(--blue01-color);
+        filter: blur(0.1vw);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 0.4vw;
+        width: 16px;
+        background-color: #ffffff;
+        position: absolute;
+        transition: all 0.5s;
+    }
+    
+    .menu-btn span:before {
+        bottom: 1.5vw;
+    }
+    
+    .menu-btn span:after {
+        top: 1.5vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue01-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        height: 80%;
+        overflow: auto;
+        padding: 10vw 20px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.25vw #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 16px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        margin: 0 10vw;
+    }
+    .menu-content ul li a::before {
+        content: "";
+        width: 30vw;
+        height: 16px;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 7vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 50vw;/*メニューを画面内へ*/
+        letter-spacing: 0.5vw;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+  
+/*タブレット対応*/
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .tatenaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+    
+    .toplogo {
+        width: 20vw;
+        margin: 2.5vw 0;
+    }  
+    
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 0;
+        z-index: 0;
+    }   
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 3.5vw;
+        text-align: center;
+        margin: 2.5vw 0;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+    }
+    
+    .topnews {
+        margin: 0 20px;
+        padding: 0 2.5vw;
+    }   
+    
+    h3 {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    
+    .contactlogo {
+        width: 30vw;
+    }
+    
+    .contactmail {
+        text-align: center;
+    }
+    
+    a {
+        color: #444;
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+
+    .menu-btn {
+        position: fixed;
+        top: 2.5vw;
+        right: 2.5vw;
+        display: flex;
+        height: 7.5vw;
+        width: 7.5vw;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        background-color: var(--blue01-color);
+        filter: blur(0.1vw);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 0.4vw;
+        width: 3.5vw;
+        background-color: #ffffff;
+        position: absolute;
+        transition: all 0.5s;
+    }
+    
+    .menu-btn span:before {
+        bottom: 1.5vw;
+    }
+    
+    .menu-btn span:after {
+        top: 1.5vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue01-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        height: 80%;
+        overflow: auto;
+        padding: 10vw 20px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 2.5vw;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        margin: 0 10vw;
+        text-align: center;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 55vw;/*メニューを画面内へ*/
+        letter-spacing: 0.5vw;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+    
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 20px 5.5vw 20px 4.5vw;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .pckiji {
+        width: 70vw;
+        height: 100vh;
+        margin: 0 0 0 30vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .contactlogo {
+        width: 25vw;
+        margin: 20px;
+    }
+    
+    .contactmail {
+        text-align: center;
+    }
+    
+    a {
+        color: #444;
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }     
+
+    #menu-btn-check {
+        display: none;
+    }
+    
+    
+    .tokusho-btn {
+        display: inline-block;
+        font-size: 1.5vw;
+        cursor: pointer;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 1.75vw;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 0 2.5vw 0vw;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1024px) and (max-width: 1599px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 5.5vw 2.5vw 4.5vw;
+    }
+    
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .pckiji {
+        width: 70vw;
+        height: 100vh;
+        margin: 0 0 0 30vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .contactlogo {
+        width: 25vw;
+        margin: 2.5vw;
+    }
+    
+    .contactmail {
+        text-align: center;
+    }
+    
+    a {
+        color: #444;
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1599px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+    
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 10vw;
+        margin: 2.5vw;
+    } 
+    
+    .ushiotop {
+        width: 75vw;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .contactlogo {
+        width: 20vw;
+    }
+    
+    .contactmail {
+        text-align: center;
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        padding: 0 0 12.5vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .flyer {
+        width: 40vw;
+    }
+    
+    a {
+        color: #444;
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw 20px;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 1.75vw;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}

@@ -1,0 +1,987 @@
+body {
+    margin: 0 auto;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    letter-spacing: 0.25vw;
+    color: #444;
+    background-image: url("背景用テクスチャ03.jpg");
+    background-size: cover;
+    font-weight: 400;
+}
+
+header {
+    text-align: center;
+}
+
+:root {
+    --blue01-color: #6e9ac1;
+    --blue02-color: #45A3F4;
+}
+
+/*縦長、スマホ対応*/
+@media only screen and (max-width: 480px) {
+    .yokonaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+
+    .toplogo {
+        width: 20vw;
+        margin: 2.5vw 0;
+    }
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 6vw;
+        font-weight: 400;
+    }
+    
+    .topnews {
+        margin: 0 20px;
+        padding: 0 2.5vw;
+    }
+    
+    
+    h3 {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .newsline {
+        position: relative;
+        padding: 2.5vw;
+        z-index: 0;
+        overflow: hidden; /*はみ出さない*/
+    }
+
+    .newsline::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        background: url('16背景02.PNG') no-repeat center/100% 100%;
+
+        mask-image:
+            linear-gradient(to right, transparent, #fff 10px, #fff calc(100% - 10px), transparent),
+            linear-gradient(to bottom, transparent, #fff 10px, #fff calc(100% - 10px), transparent);
+        mask-composite: intersect; 
+        -webkit-mask-composite: source-in; /*Safari*/
+
+        -webkit-mask-image:
+            linear-gradient(to right, transparent, #fff 10px, #fff calc(100% - 10px), transparent),
+            linear-gradient(to bottom, transparent, #fff 10px, #fff calc(100% - 10px), transparent);
+    }
+
+    .newsarticle {
+        list-style: none;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        position: relative;
+        z-index: 1;
+    }
+
+    
+    a {
+        color: var(--blue01-color);
+    }
+    
+    .date {
+        font-size: 12px;
+    }
+    
+    .section {
+        padding-bottom: 20px;
+    }
+    
+    .newsphoto,
+    .flyerphoto {
+        width: 80vw;
+        margin: 8px 0;
+    }
+    
+    .iwaiphoto {
+        width: 50vw;
+        margin: 8px 15vw;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+    
+    .squarephoto {
+        width: 60vw;
+        margin: 2.5vw;
+    }
+    
+    .square2 {
+        text-align: center;
+    }
+    
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 16px;
+        right: 12px;
+        display: flex;
+        height: 32px;
+        width: 32px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        background-color: var(--blue01-color);
+        filter: blur(0.1vw);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 0.4vw;
+        width: 16px;
+        background-color: #ffffff;
+        position: absolute;
+        transition: all 0.5s;
+    }
+    
+    .menu-btn span:before {
+        bottom: 1.5vw;
+    }
+    
+    .menu-btn span:after {
+        top: 1.5vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue01-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        height: 80%;
+        overflow: auto;
+        padding: 10vw 20px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.25vw #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 16px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        margin: 0 10vw;
+    }
+    .menu-content ul li a::before {
+        content: "";
+        width: 30vw;
+        height: 16px;
+        transform: rotate(45deg);
+        position: absolute;
+        top: 7vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 50vw;/*メニューを画面内へ*/
+        letter-spacing: 0.5vw;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+  
+/*タブレット対応*/
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+    .tatenaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 0;
+        z-index: 0;
+    }   
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 16px;
+        text-align: center;
+        margin: 2.5vw 0;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+    }
+    
+    .topnews {
+        margin: 0 20px;
+        padding: 0 2.5vw;
+    }   
+    
+    h3 {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    
+    .newsline {
+        position: relative;
+        padding: 2.5vw;
+        z-index: 0;
+        overflow: hidden; /*はみ出さない*/
+    }
+
+    .newsline::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+
+        background: url('16背景02.PNG') no-repeat center/100% 100%;
+
+        mask-image:
+            linear-gradient(to right, transparent, black 20%, black 80%, transparent),
+            linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        mask-composite: intersect;
+        -webkit-mask-composite: source-in; /*Safari*/
+
+        -webkit-mask-image:
+            linear-gradient(to right, transparent, #fff 10px, #fff calc(100% - 10px), transparent),
+            linear-gradient(to bottom, transparent, #fff 10px, #fff calc(100% - 10px), transparent);
+    }
+
+    .newsarticle {
+        list-style: none;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        position: relative;
+        z-index: 1;
+    }
+
+
+
+    
+    a {
+        color: var(--blue01-color);
+    }
+    
+    .date {
+        font-size: 2.75vw;
+    }
+    
+    .section {
+        padding-bottom: 20px;
+    }
+
+    .centerphoto {
+        text-align: center;
+    }
+    
+    .flyerphoto {
+        width: 37.5vw;
+        margin: 0.75vw;
+    }
+
+    .newsphoto {
+        width: 80vw;
+        margin: 8px 0;
+    }
+    
+    .iwaiphoto {
+        width: 50vw;
+        margin: 8px 15vw;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+    
+    .squarephoto {
+        width: 37.5vw;
+        margin: 0.75vw;
+    }
+    
+    .square2 {
+        text-align: center;
+    }
+    
+    
+    /*メニュー*/
+
+    .menu-btn {
+        position: fixed;
+        top: 2.5vw;
+        right: 2.5vw;
+        display: flex;
+        height: 7.5vw;
+        width: 7.5vw;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        background-color: var(--blue01-color);
+        filter: blur(0.1vw);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 0.4vw;
+        width: 3.5vw;
+        background-color: #ffffff;
+        position: absolute;
+        transition: all 0.5s;
+    }
+    
+    .menu-btn span:before {
+        bottom: 1.5vw;
+    }
+    
+    .menu-btn span:after {
+        top: 1.5vw;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue01-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        height: 80%;
+        overflow: auto;
+        padding: 10vw 20px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 2.5vw;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        margin: 0 10vw;
+        text-align: center;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 55vw;/*メニューを画面内へ*/
+        letter-spacing: 0.5vw;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 20px 5.5vw 20px 4.5vw;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    
+    p {
+        font-size: 1vw;
+    }
+
+    a {
+        color: var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw;
+    }
+    
+    .topnews {
+        padding: 0vw;
+    }
+
+    td {
+        width: 30vw;
+        vertical-align: top;
+    }
+
+    table {
+        margin: 0;
+    }
+    
+    
+    h3 {
+        font-size: 8px;
+        font-weight: 400;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        position: relative;
+        background-color:rgba(214,239,255,0.8);
+        z-index: 0;
+        box-shadow: inset 0 0 0.5vw 0.5vw rgba(214,239,255,1);
+        margin: 2.5vw 7.5vw;
+        padding: 2.5vw;
+
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        padding-bottom: 2.5vw;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .yoyakuurl {
+        color: var(--blue01-color);
+    }
+    
+    .date {
+        font-size: 1.75vw;
+    }
+    
+    .section {
+        padding-bottom: 2.5vw;
+    }
+
+    .centerphoto {
+        text-align: center;
+    }
+    
+    .newsphoto {
+        width: 40vw;
+        margin: 8px 0;
+    }
+
+    .iwaiphoto {
+        width: 20vw;
+        margin: 2.5vw;
+    }
+
+    .taphoto {
+        width: 25vw;
+    }
+
+    .caption {
+        width: 50vw;
+    }
+
+    .attention {
+        font-size: 0.75vw;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+    
+    .squarephoto,
+    .flyerphoto {
+        width: 22.5vw;
+        margin: 1vw;
+    }
+    
+    .square2 {
+        text-align: center;
+    }
+    
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }     
+
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1024px) and (max-width: 1599px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 5.5vw 2.5vw 4.5vw;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    p {
+        font-size: 1vw;
+    }
+
+    a {
+        color: var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw;
+    }
+    
+    .topnews {
+        padding: 0vw;
+    }
+
+    td {
+        width: 30vw;
+        vertical-align: top;
+    }
+
+    table {
+        margin: 0;
+    }
+    
+    
+    h3 {
+        font-size: 8px;
+        font-weight: 400;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        position: relative;
+        background-color:rgba(214,239,255,0.8);
+        z-index: 0;
+        box-shadow: inset 0 0 0.5vw 0.5vw rgba(214,239,255,1);
+        margin: 2.5vw 7.5vw;
+        padding: 2.5vw;
+
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        padding-bottom: 2.5vw;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .yoyakuurl {
+        color: var(--blue01-color);
+    }
+    
+    .date {
+        font-size: 1.75vw;
+    }
+    
+    .section {
+        padding-bottom: 2.5vw;
+    }
+
+    .centerphoto {
+        text-align: center;
+    }
+    
+    .newsphoto {
+        width: 40vw;
+        margin: 8px 0;
+    }
+
+    .iwaiphoto {
+        width: 20vw;
+        margin: 2.5vw;
+    }
+
+    .taphoto {
+        width: 25vw;
+    }
+
+    .caption {
+        width: 50vw;
+    }
+
+    .attention {
+        font-size: 0.75vw;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+    
+    .squarephoto,
+    .flyerphoto {
+        width: 22.5vw;
+        margin: 1vw;
+    }
+    
+    .square2 {
+        text-align: center;
+    }
+    
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1599px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 10vw;
+        margin: 2.5vw;
+    }
+
+    .ushiotop {
+        width: 75vw;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    
+    p {
+        font-size: 1vw;
+    }
+    
+    h2 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw;
+    }
+    
+    .topnews {
+        padding: 0vw;
+    }
+
+    td {
+        width: 30vw;
+        vertical-align: top;
+    }
+
+    table {
+        margin: 0;
+    }
+    
+    
+    h3 {
+        font-size: 8px;
+        font-weight: 400;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        position: relative;
+        background-color:rgba(214,239,255,0.8);
+        z-index: 0;
+        box-shadow: inset 0 0 0.5vw 0.5vw rgba(214,239,255,1);
+        margin: 2.5vw 7.5vw;
+        padding: 2.5vw;
+
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        padding-bottom: 2.5vw;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .yoyakuurl {
+        color: var(--blue01-color);
+    }
+    
+    .date {
+        font-size: 1.75vw;
+    }
+    
+    .section {
+        padding-bottom: 2.5vw;
+    }
+
+    .centerphoto {
+        text-align: center;
+    }
+    
+    .newsphoto {
+        width: 40vw;
+        margin: 8px 0;
+    }
+
+    .iwaiphoto {
+        width: 20vw;
+        margin: 2.5vw;
+    }
+
+    .taphoto {
+        width: 25vw;
+    }
+
+    .caption {
+        width: 50vw;
+    }
+
+    .attention {
+        font-size: 0.75vw;
+    }
+    
+    span {
+        font-weight: 500;
+    }
+    
+    .squarephoto,
+    .flyerphoto {
+        width: 22.5vw;
+        margin: 1vw;
+    }
+    
+    .square2 {
+        text-align: center;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw 20px;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 1.75vw;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}
