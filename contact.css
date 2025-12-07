@@ -1,19 +1,31 @@
+html{
+  scroll-behavior: smooth;
+}
+
 body {
     margin: 0 auto;
     font-family: 'Zen Kaku Gothic New', sans-serif;
-    letter-spacing: 0.25vw;
+    letter-spacing: 1px;
     color: #444;
     background-image: url("背景用テクスチャ03.jpg");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 header {
+    width: 100%;
+    border-bottom: 0.5px solid #999;
+    z-index: 9999;
+}
+
+.headlogo {
     text-align: center;
 }
 
 :root {
     --blue01-color: #6e9ac1;
     --blue02-color: #45A3F4;
+    --blue03-color: #86a6c3;
 }
 
 /*縦長、スマホ対応*/
@@ -26,9 +38,27 @@ header {
         display: none;
     }
     
+    .headlogo {
+        height: 70px;
+    }
+
+    header {
+        position: fixed;
+        background: url("背景用テクスチャ03.jpg");
+        background-size: cover;
+        height: 70px;
+        top: 0;
+        left: 0;
+    }
+
     .toplogo {
-        width: 20vw;
-        margin: 2.5vw 0;
+        width: 80px;
+        margin: 12.5px 0;
+    }
+
+    .pckiji {
+        width: 100%;
+        margin-top: 80px;
     }
     
     p {
@@ -37,12 +67,13 @@ header {
     
     h2 {
         font-size: 16px;
-        text-align: center;
+        font-weight: 400;
     }
     
     h1 {
         text-align: center;
         font-size: 6vw;
+        font-weight: 400;
     }
     
     .contactlogo {
@@ -62,16 +93,16 @@ header {
     
     .menu-btn {
         position: fixed;
-        top: 16px;
-        right: 12px;
+        top: 15px;
+        right: 15px;
         display: flex;
-        height: 32px;
-        width: 32px;
+        height: 40px;
+        width: 40px;
         justify-content: center;
         align-items: center;
         z-index: 90;
-        background-color: var(--blue01-color);
-        filter: blur(0.1vw);
+        /*background-color: var(--blue01-color);*/
+        filter: blur(0.5px);
     }
     
     .menu-btn span,
@@ -79,19 +110,21 @@ header {
     .menu-btn span:after {
         content:" ";
         display: block;
-        height: 0.4vw;
-        width: 16px;
-        background-color: #ffffff;
+        height: 2px;
+        width: 30px;
+        /*background-color: #ffffff;*/
+        background-color: var(--blue01-color);
         position: absolute;
         transition: all 0.5s;
+        border-radius: 5px;
     }
     
     .menu-btn span:before {
-        bottom: 1.5vw;
+        bottom: 10px;
     }
     
     .menu-btn span:after {
-        top: 1.5vw;
+        top: 10px;
     }
     
     #menu-btn-check:checked ~ .menu-btn span {
@@ -100,54 +133,49 @@ header {
     #menu-btn-check:checked ~ .menu-btn span::before {
         bottom: 0;
         transform: rotate(45deg);
+        background-color: #fff;
     }
     #menu-btn-check:checked ~ .menu-btn span::after {
         top: 0;
         transform: rotate(-45deg);
+        background-color: #fff;
     }
     
     /*中身自体*/
     .menu-content {
         height: 100%;
+        width: 70%;
         position: fixed;
         top: 0;
         left: 100%;
         z-index: 80;
-        background-color: var(--blue01-color);
+        background-color: var(--blue03-color);
         transition: all 1s;
     }
     
     .menu-content ul {
-        height: 80%;
         overflow: auto;
-        padding: 10vw 20px 0;
+        padding: 80px 40px 0;
     }
     .menu-content ul li {
-        border-bottom: solid 0.25vw #fff;
+        border-bottom: solid 0.5px #fff;
         list-style: none;
     }
     .menu-content ul li a {
         display: block;
-        font-size: 16px;
+        font-size: 20px;
         box-sizing: border-box;
         color:#fff;
         text-decoration: none;
-        padding: 1vw;
-        letter-spacing: 0.5vw;
-        margin: 0 10vw;
-    }
-    .menu-content ul li a::before {
-        content: "";
-        width: 30vw;
-        height: 16px;
-        transform: rotate(45deg);
-        position: absolute;
-        top: 7vw;
+        padding: 12.5px 0;
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: bolder;
     }
     
     #menu-btn-check:checked ~ .menu-content {
-        left: 50vw;/*メニューを画面内へ*/
-        letter-spacing: 0.5vw;
+        left: 30%;/*メニューを画面内へ*/
+        letter-spacing: 3px;
     }
     
     #menu-btn-check {

@@ -13,6 +13,8 @@
       <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="google-site-verification" content="QKsXajOE1ClrZFmArVBXKb_iYR80n3-jADjgOLxzS4E" />
+      <link rel="icon" href="う潮アイコン.png">
+      <link rel="apple-touch-icon" href="う潮アイコン.png">
       <title>う潮</title>
   </head>
   <body>
@@ -64,7 +66,7 @@
       </div>
     </header>
 
-    <div class="ushiotop">
+    <div class="div_ushiotop">
       <img src="ushiotop.jpg" class="ushiotop">
       <p class="photographer tatenaga">撮影:黄木日菜子</p>
       <p class="photographer yokonaga">撮影:黄木日菜子</p>
@@ -76,6 +78,7 @@
 
     <div class="tatenaga">
       <div class="nextstage">
+        <h2><span class="newstitle">Topic</span></h2>
         <a href="news.html">
           <img src="すいか本チラシ表.jpg" class="top_next_ver">
         </a><!--横ならtopnext, 縦ならtopnextver-->
@@ -83,31 +86,24 @@
 
       <div class="topnews">
         <h2><span class="newstitle">News</span></h2>
-        <ul class="newsline">
-          <li class="newsarticle">
-            <p class="date">2025.2.21</p>
-            <h3><a href="news.html#20250221" class="articlelink">『すいかの種の黒黒』アフタートーク解禁 第2弾！！
-            </a></h3>
-          </li>
-          <li class="newsarticle">
-            <p class="date">2025.2.5</p>
-            <h3><a href="news.html#20250205" class="articlelink">『すいかの種の黒黒』ながおあいりよりご挨拶
-            </a></h3>
-          </li>
-          <li class="newsarticle">
-            <p class="date">2025.2.4</p>
-            <h3><a href="news.html#20250204" class="articlelink">『すいかの種の黒黒』アフタートーク開催決定！！！
-            </a></h3>
-          </li>
-          <li class="newsarticle">
-            <p class="date">2025.1.13</p>
-            <h3><a href="news.html#20240113" class="articlelink">『すいかの種の黒黒』予約受付スタート
-            </a></h3>
-          </li>
-          <p class="plusnews">
-            <a href="news.html">もっと見る</a>
-          </p>
-        </ul>
+        <ul id="top-news"></ul>
+
+          <script>
+          fetch("https://ushio-news.onrender.com/api/news/")
+            .then(res => res.json())
+            .then(data => {
+              const ul = document.getElementById("top-news");
+              data.slice(0, 3).forEach(n => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                  <a href="news.html?slug=${n.slug}">
+                    ${n.date} — ${n.title}
+                  </a>
+                `;
+                ul.appendChild(li);
+              });
+            });
+          </script>
       </div>
     </div>
 
@@ -117,39 +113,34 @@
           <td>
             <div class="topnews">
               <h2><span class="newstitle">Topic</span></h2>
-              <a href="news.html">
-                <img src="すいか本チラシ表.jpg" class="top_next_ver">
-              </a><!--横ならtopnext, 縦ならtopnextver-->
+              <div class="topic_pic">
+                <a href="news.html">
+                  <img src="すいか本チラシ表.jpg" class="top_next_ver">
+                </a><!--横ならtopnext, 縦ならtopnextver-->
+              </div>
             </div>
           </td>
           <td>
             <div class="topnews">
               <h2><span class="newstitle">News</span></h2>
-              <ul class="newsline">
-                <li class="newsarticle">
-                  <p class="date">2025.2.21</p>
-                  <h3><a href="news.html#20250221" class="articlelink">『すいかの種の黒黒』アフタートーク解禁 第2弾！！
-                  </a></h3>
-                </li>
-                <li class="newsarticle">
-                  <p class="date">2025.2.5</p>
-                  <h3><a href="news.html#20250205" class="articlelink">『すいかの種の黒黒』ながおあいりよりご挨拶
-                  </a></h3>
-                </li>
-                <li class="newsarticle">
-                  <p class="date">2025.2.4</p>
-                  <h3><a href="news.html#20250204" class="articlelink">『すいかの種の黒黒』アフタートーク開催決定！！！
-                  </a></h3>
-                </li>
-                <li class="newsarticle">
-                  <p class="date">2025.1.13</p>
-                  <h3><a href="news.html#20250113" class="articlelink">『すいかの種の黒黒』予約受付スタート
-                  </a></h3>
-                </li>
-                <p class="plusnews">
-                  <a href="news.html">もっと見る</a>
-                </p>
-              </ul>
+              <ul id="top-news"></ul>
+
+              <script>
+              fetch("https://ushio-news.onrender.com/api/news/")
+                .then(res => res.json())
+                .then(data => {
+                  const ul = document.getElementById("top-news");
+                  data.slice(0, 3).forEach(n => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                      <a href="news.html?slug=${n.slug}">
+                        ${n.date} — ${n.title}
+                      </a>
+                    `;
+                    ul.appendChild(li);
+                  });
+                });
+              </script>
             </div>
           </td>
         </tr>
@@ -167,26 +158,24 @@
           <td class="righttd">
             <div class="topnews">
               <h2><span class="newstitle">News</span></h2>
-              <ul class="newsline">
-                <li class="newsarticle">
-                  <p class="date">2025.2.21</p>
-                  <h3><a href="news.html#20250221" class="articlelink">『すいかの種の黒黒』アフタートーク解禁 第2弾！！
-                  </a></h3>
-                </li>
-                <li class="newsarticle">
-                  <p class="date">2025.2.5</p>
-                  <h3><a href="news.html#20250205" class="articlelink">『すいかの種の黒黒』ながおあいりよりご挨拶
-                  </a></h3>
-                </li>
-                <li class="newsarticle">
-                  <p class="date">2025.2.4</p>
-                  <h3><a href="news.html#20250204" class="articlelink">『すいかの種の黒黒』アフタートーク開催決定！！！
-                  </a></h3>
-                </li>
-                <p class="plusnews">
-                  <a href="news.html">もっと見る</a>
-                </p>
-              </ul>
+              <ul id="top-news"></ul>
+
+              <script>
+              fetch("https://ushio-news.onrender.com/api/news/")
+                .then(res => res.json())
+                .then(data => {
+                  const ul = document.getElementById("top-news");
+                  data.slice(0, 3).forEach(n => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `
+                      <a href="news.html?slug=${n.slug}">
+                        ${n.date} — ${n.title}
+                      </a>
+                    `;
+                    ul.appendChild(li);
+                  });
+                });
+              </script>
             </div>
           </td>
         </tr>

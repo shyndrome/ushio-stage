@@ -68,7 +68,32 @@
       <h1>News</h1>
 
       <div class="topnews">
-        <ul class="newsline" id="20250221"><!--すいかアフト藤田さん-->
+        <div id="news-detail"></div>
+
+        <script>
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get("slug");
+
+        fetch(`https://ushio-news.onrender.com/api/news/${slug}/`)
+          .then(res => res.json())
+          .then(n => {
+            const el = document.getElementById("news-detail");
+            let html = `
+              <p class="date">${n.date}</p>
+              <h3>${n.title}</h3>
+              <div>${n.content}</div>
+            `;
+
+            n.images.forEach(src => {
+              html += `<div class="centerphoto"><img src="${src}" class="newsphoto"></div>`;
+            });
+
+            el.innerHTML = html;
+          });
+        </script>
+
+        <!--
+        <ul class="newsline" id="20250221"><!--すいかアフト藤田さん
           <li class="newsarticle">
             <p class="date">2025.2.21</p>
             <h3>『すいかの種の黒黒』アフタートーク解禁 第2弾！！</h3>
@@ -136,7 +161,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20250205"><!--すいかごあいさつ-->
+        <ul class="newsline" id="20250205"><!--すいかごあいさつ
           <li class="newsarticle">
             <p class="date">2025.2.5</p>
             <h3>『すいかの種の黒黒』ながおあいりよりご挨拶</h3>
@@ -216,7 +241,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20250204"><!--すいかアフト岩井さん-->
+        <ul class="newsline" id="20250204"><!--すいかアフト岩井さん
           <li class="newsarticle">
             <p class="date">2025.2.4</p>
             <h3>『すいかの種の黒黒』アフタートーク開催決定！！！</h3>
@@ -290,7 +315,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20250113"><!--すいか本チラシ予約解禁-->
+        <ul class="newsline" id="20250113"><!--すいか本チラシ予約解禁
           <li class="newsarticle">
             <p class="date">2025.1.13</p>
             <h3>『すいかの種の黒黒』予約受付スタート</h3>
@@ -606,7 +631,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20241007"><!--すいか告知-->
+        <ul class="newsline" id="20241007"><!--すいか告知
           <li class="newsarticle">
             <p class="date">2024.10.7</p>
             <h3>次回公演『すいかの種の黒黒』上演決定</h3>
@@ -632,7 +657,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20240905"><!--疾走ごあいさつ-->
+        <ul class="newsline" id="20240905"><!--疾走ごあいさつ
           <li class="newsarticle">
             <p class="date">2024.9.5</p>
             <h3>『疾走』ながおあいりよりご挨拶</h3>
@@ -704,14 +729,14 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20240630"><!--疾走本チラシ解禁-->
+        <ul class="newsline" id="20240630"><!--疾走本チラシ解禁
           <li class="newsarticle">
             <p class="date">2024.6.30</p>
             <h3>『疾走』詳細情報解禁</h3>
             
             <div class="square2">
-              <a href="疾走　本表.jpg" target="_blank"><img src="疾走　本表.jpg" class="squarephoto"></a>
-              <a href="疾走　本裏.jpg" target="_blank"><img src="疾走　本裏.jpg" class="squarephoto"></a>
+              <a href="疾走　本表.jpg" target="_blank"><img src="疾走　本表.jpg" class="flyerphoto"></a>
+              <a href="疾走　本裏.jpg" target="_blank"><img src="疾走　本裏.jpg" class="flyerphoto"></a>
             </div>
 
             <div class="tatenaga">
@@ -997,7 +1022,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20240526"><!--疾走仮チラシ解禁-->
+        <ul class="newsline" id="20240526"><!--疾走仮チラシ解禁
           <li class="newsarticle">
             <p class="date">2024.5.26</p>
             <h3>う潮 新作公演『疾走』情報解禁</h3>
@@ -1094,7 +1119,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20230830"><!--ふうかちゃんアフト-->
+        <ul class="newsline" id="20230830"><!--ふうかちゃんアフト
           <li class="newsarticle">
             <p class="date">2023.8.30</p>
             <h3>『ふうかちゃん』アフタートーク開催決定！！！</h3>
@@ -1168,7 +1193,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20230816"><!--ご挨拶-->
+        <ul class="newsline" id="20230816"><!--ご挨拶
           <li class="newsarticle">
             <p class="date">2023.8.16</p>
             <h3>ながおあいりよりご挨拶</h3>
@@ -1260,7 +1285,7 @@
           </li>
         </ul>
 
-        <ul class="newsline" id="20230715"><!--ふうかちゃん解禁-->
+        <ul class="newsline" id="20230715"><!--ふうかちゃん解禁
           <li class="newsarticle">
             <p class="date">2023.7.15</p>
             <h3>『ふうかちゃん』詳細情報解禁＆予約スタート</h3>
@@ -1410,6 +1435,7 @@
               
           </li>
         </ul>
+      -->
       </div>
     </div>
 
