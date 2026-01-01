@@ -75,43 +75,41 @@
         </ul>
 
         <script>
-          fetch("https://ushio-news.onrender.com/api/news/")
-            .then(response => response.json())
-            .then(data => {
-              const list = document.getElementById("news-list");
+        fetch("https://ushio-news.onrender.com/api/news/")
+          .then(response => response.json())
+          .then(data => {
+            const list = document.getElementById("news-list");
 
-              data.forEach(news => {
-                const li = document.createElement("li");
-                li.className = "newsarticle";
+            data.forEach(news => {
+              const li = document.createElement("li");
+              li.className = "newsarticle";
 
-                li.innerHTML = `
-                  <p class="date">${news.date}</p>
+              li.innerHTML = `
+                <p class="date">${news.date}</p>
+                <h3>${news.title}</h3>
 
-                  <h3 class="articlelink">
-                    ${news.title}
-                  </h3>
+                <div class="content">
+                  ${news.content.replace(/\n/g, "<br>")}
+                </div>
 
-                  <div class="content">
-                    ${(news.content || "").replace(/\n/g, "<br>")}
-                  </div>
+                <div class="images">
+                  ${(news.images || []).map(img => `
+                    <figure class="centerphoto">
+                      <img src="${img.image}" class="newsphoto" alt="">
+                      ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
+                    </figure>
+                  `).join("")}
+                </div>
+              `;
 
-                  <div class="images">
-                    ${(news.images || []).map(img => `
-                      <figure>
-                        <img src="${img.image}" alt="">
-                        ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
-                      </figure>
-                    `).join("")}
-                  </div>
-                `;
-
-                list.appendChild(li);
-              });
-            })
-            .catch(error => {
-              console.error("ニュース取得エラー:", error);
+              list.appendChild(li);
             });
+          })
+          .catch(error => {
+            console.error("ニュース取得エラー:", error);
+          });
         </script>
+
 
 
         <!--<script>
