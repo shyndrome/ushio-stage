@@ -70,37 +70,39 @@
       <div class="topnews">
         <div id="news-detail"></div>
 
-        <ul class="newsline" id="news-list">
-          <!-- ここにDjangoの記事が入る -->
-        </ul>
+        <div id="news-container"></div>
 
         <script>
-          fetch("https://ushio-news.onrender.com/api/news/")
-            .then(response => response.json())
-            .then(data => {
-              const list = document.getElementById("news-list");
+        fetch("https://ushio-news.onrender.com/api/news/")
+          .then(res => res.json())
+          .then(data => {
+            const container = document.getElementById("news-container");
 
-              data.forEach(news => {
-                const li = document.createElement("li");
-                li.className = "newsarticle";
+            data.forEach(article => {
+              const articleEl = document.createElement("article");
 
-                li.innerHTML = `
-                  <p class="date">${news.date}</p>
-                  <h3>
-                    <!--<a href="news.html?slug=${news.slug}" class="articlelink">-->
-                      ${news.title}
-                    <!--</a>-->
-                  </h3>
-                  <p>${news.content}</p>
-                `;
+              articleEl.innerHTML = `
+                <p class="date">${article.date}</p>
+                <h3>${article.title}</h3>
+                <div class="content">${article.content}</div>
 
-                list.appendChild(li);
-              });
-            })
-            .catch(error => {
-              console.error("ニュース取得エラー:", error);
+                <div class="images">
+                  ${article.images.map(img => `
+                    <figure>
+                      <img src="${img.image}" alt="">
+                      ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
+                    </figure>
+                  `).join("")}
+                </div>
+
+                <hr>
+              `;
+
+              container.appendChild(articleEl);
             });
+          });
         </script>
+
 
 
         <!--<script>
