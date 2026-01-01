@@ -83,29 +83,20 @@
               const li = document.createElement("li");
               li.className = "newsarticle";
 
-              // 改行を <br> に変換
-              const contentHtml = news.content
-                ? news.content.replace(/\r?\n/g, "<br>")
-                : "";
-
               li.innerHTML = `
                 <p class="date">${news.date}</p>
                 <h3>${news.title}</h3>
 
                 <div class="content">
-                  ${contentHtml}
+                  ${news.content.replace(/\r?\n/g, "<br>")}
                 </div>
 
                 <div class="images">
-                  ${
-                    Array.isArray(news.images)
-                      ? news.images.map(imgUrl => `
-                        <figure class="centerphoto">
-                          <img src="https://ushio-news.onrender.com${imgUrl}" class="newsphoto">
-                        </figure>
-                      `).join("")
-                      : ""
-                  }
+                  ${news.images.map(imgUrl => `
+                    <figure class="centerphoto">
+                      <img src="https://ushio-news.onrender.com${imgUrl}" class="newsphoto">
+                    </figure>
+                  `).join("")}
                 </div>
               `;
 
@@ -119,39 +110,6 @@
 
 
         <!--<script>
-        fetch("https://ushio-news.onrender.com/api/news/")
-          .then(response => response.json())
-          .then(data => {
-            const list = document.getElementById("news-list");
-
-            data.forEach(news => {
-              const li = document.createElement("li");
-              li.className = "newsarticle";
-
-              li.innerHTML = `
-                <p class="date">${news.date}</p>
-                <h3>${news.title}</h3>
-
-                <div class="content">
-                  ${news.content.replace(/\r?\n/g, "<br>")}
-                </div>
-
-                <div class="images">
-                  ${news.images.map(imgPath => `
-                    <div class="centerphoto">
-                      <img src="https://ushio-news.onrender.com${imgPath}" class="newsphoto">
-                    </div>
-                  `).join("")}
-                </div>
-              `;
-
-              list.appendChild(li);
-            });
-          })
-          .catch(error => {
-            console.error("ニュース取得エラー:", error);
-          });
-        </script>
         const params = new URLSearchParams(window.location.search);
         const slug = params.get("slug");
 
