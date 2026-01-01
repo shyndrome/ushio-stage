@@ -13,8 +13,9 @@
       <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="google-site-verification" content="QKsXajOE1ClrZFmArVBXKb_iYR80n3-jADjgOLxzS4E" />
-      <link rel="icon" href="う潮アイコン.png">
-      <link rel="apple-touch-icon" href="う潮アイコン.png">
+      <link rel="icon" href="https://www.ushio-stage.com/favicon.ico" sizes="any">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
+      <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
       <title>う潮</title>
   </head>
   <body>
@@ -86,20 +87,27 @@
 
       <div class="topnews">
         <h2><span class="newstitle">News</span></h2>
-        <ul id="top-news"></ul>
+        <ul class="newsline" id="top-news"></ul>
 
           <script>
           fetch("https://ushio-news.onrender.com/api/news/")
             .then(res => res.json())
             .then(data => {
               const ul = document.getElementById("top-news");
-              data.slice(0, 3).forEach(n => {
+
+              data.slice(0,4).forEach(item => {
                 const li = document.createElement("li");
+                li.className = "newsarticle";
+
                 li.innerHTML = `
-                  <a href="news.html?slug=${n.slug}">
-                    ${n.date} — ${n.title}
-                  </a>
+                  <p class="date">${item.date}</p>
+                  <h3>
+                    <a href="news.html?slug=${item.slug}" class="articlelink">
+                      ${item.title}
+                    </a>
+                  </h3>
                 `;
+
                 ul.appendChild(li);
               });
             });
@@ -123,20 +131,27 @@
           <td>
             <div class="topnews">
               <h2><span class="newstitle">News</span></h2>
-              <ul id="top-news"></ul>
+              <ul class="newsline" id="top-news"></ul>
 
               <script>
               fetch("https://ushio-news.onrender.com/api/news/")
                 .then(res => res.json())
                 .then(data => {
                   const ul = document.getElementById("top-news");
-                  data.slice(0, 3).forEach(n => {
+
+                  data.slice(0,4).forEach(item => {
                     const li = document.createElement("li");
+                    li.className = "newsarticle";
+
                     li.innerHTML = `
-                      <a href="news.html?slug=${n.slug}">
-                        ${n.date} — ${n.title}
-                      </a>
+                      <p class="date">${item.date}</p>
+                      <h3>
+                        <a href="news.html?slug=${item.slug}" class="articlelink">
+                          ${item.title}
+                        </a>
+                      </h3>
                     `;
+
                     ul.appendChild(li);
                   });
                 });
@@ -158,24 +173,32 @@
           <td class="righttd">
             <div class="topnews">
               <h2><span class="newstitle">News</span></h2>
-              <ul id="top-news"></ul>
+              <ul class="newsline" id="top-news"></ul>
 
               <script>
               fetch("https://ushio-news.onrender.com/api/news/")
                 .then(res => res.json())
                 .then(data => {
                   const ul = document.getElementById("top-news");
-                  data.slice(0, 3).forEach(n => {
+
+                  data.slice(0,4).forEach(item => {
                     const li = document.createElement("li");
+                    li.className = "newsarticle";
+
                     li.innerHTML = `
-                      <a href="news.html?slug=${n.slug}">
-                        ${n.date} — ${n.title}
-                      </a>
+                      <p class="date">${item.date}</p>
+                      <h3>
+                        <a href="news.html?slug=${item.slug}" class="articlelink">
+                          ${item.title}
+                        </a>
+                      </h3>
                     `;
+
                     ul.appendChild(li);
                   });
                 });
               </script>
+
             </div>
           </td>
         </tr>
