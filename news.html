@@ -70,7 +70,35 @@
       <div class="topnews">
         <div id="news-detail"></div>
 
+        <ul class="newsline" id="news-list">
+          <!-- ここにJSで自動挿入 -->
+        </ul>
+
         <script>
+        fetch("https://ushio-news.onrender.com/api/news/")
+          .then(res => res.json())
+          .then(data => {
+            const ul = document.getElementById("news-list");
+
+            data.forEach(item => {
+              const li = document.createElement("li");
+              li.className = "newsarticle";
+
+              li.innerHTML = `
+                <p class="date">${item.date}</p>
+                <h3>
+                  <a href="news.html?slug=${item.slug}" class="articlelink">
+                    ${item.title}
+                  </a>
+                </h3>
+              `;
+
+              ul.appendChild(li);
+            });
+          });
+        </script>
+
+        <!--<script>
         const params = new URLSearchParams(window.location.search);
         const slug = params.get("slug");
 
@@ -90,7 +118,7 @@
 
             el.innerHTML = html;
           });
-        </script>
+        </script>-->
 
         <!--
         <ul class="newsline" id="20250221"><!--すいかアフト藤田さん
