@@ -75,27 +75,26 @@
         </ul>
 
         <script>
-        fetch("https://ushio-news.onrender.com/api/news/")
-          .then(res => res.json())
-          .then(data => {
-            const ul = document.getElementById("news-list");
+          fetch("https://ushio-news.onrender.com/api/news/")
+            .then(res => res.json())
+            .then(data => {
+              const ul = document.getElementById("news-list");
 
-            data.forEach(item => {
-              const li = document.createElement("li");
-              li.className = "newsarticle";
+              data.forEach(news => {
+                const li = document.createElement("li");
+                li.className = "newsarticle";
 
-              li.innerHTML = `
-                <p class="date">${item.date}</p>
-                <h3>
-                  <a href="news.html?slug=${item.slug}" class="articlelink">
-                    ${item.title}
-                  </a>
-                </h3>
-              `;
-
-              ul.appendChild(li);
+                li.innerHTML = `
+                  <p class="date">${news.date}</p>
+                  <h3>
+                    <a href="news_detail.html?slug=${news.slug}" class="articlelink">
+                      ${news.title}
+                    </a>
+                  </h3>
+                `;
+                ul.appendChild(li);
+              });
             });
-          });
         </script>
 
         <!--<script>
