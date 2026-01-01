@@ -87,10 +87,11 @@
                 li.innerHTML = `
                   <p class="date">${news.date}</p>
                   <h3>
-                    <a href="news.html?slug=${news.slug}" class="articlelink">
+                    <!--<a href="news.html?slug=${news.slug}" class="articlelink">-->
                       ${news.title}
-                    </a>
+                    <!--</a>-->
                   </h3>
+                  <p>${news.content}</p>
                 `;
 
                 list.appendChild(li);
