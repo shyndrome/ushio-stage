@@ -74,39 +74,46 @@
         </ul>
 
         <script>
-          fetch("https://ushio-news.onrender.com/api/news/")
-            .then(response => response.json())
-            .then(data => {
-              const list = document.getElementById("news-list");
+fetch("https://ushio-news.onrender.com/api/news/")
+  .then(response => response.json())
+  .then(data => {
+    const list = document.getElementById("news-list");
+    list.innerHTML = "";
 
-              data.forEach(news => {
-                const li = document.createElement("li");
-                li.className = "newsarticle";
+    data.forEach(news => {
+      const li = document.createElement("li");
+      li.className = "newsarticle";
 
-                li.innerHTML = `
-                  <p class="date">${news.date}</p>
-                  <h3>${news.title}</h3>
+      const imagesHtml = (news.images || []).map(imgUrl => `
+        <figure class="centerphoto">
+          <img src="https://ushio-news.onrender.com${imgUrl}" class="newsphoto">
+        </figure>
+      `).join("");
 
-                  <div class="content">
-                    ${news.content.replace(/\r?\n/g, "<br>")}
-                  </div>
+      const contentHtml = (news.content || "")
+        .replace(/\r?\n/g, "<br>");
 
-                  <div class="images">
-                    ${news.images.map(imgUrl => `
-                      <figure class="centerphoto">
-                        <img src="https://ushio-news.onrender.com${imgUrl}" class="newsphoto">
-                      </figure>
-                    `).join("")}
-                  </div>
-                `;
+      li.innerHTML = `
+        <p class="date">${news.date}</p>
+        <h3>${news.title}</h3>
 
-                list.appendChild(li);
-              });
-            })
-            .catch(error => {
-              console.error("ニュース取得エラー:", error);
-            });
-          </script>
+        <div class="content">
+          ${contentHtml}
+        </div>
+
+        <div class="images">
+          ${imagesHtml}
+        </div>
+      `;
+
+      list.appendChild(li);
+    });
+  })
+  .catch(error => {
+    console.error("ニュース取得エラー:", error);
+  });
+</script>
+
 
 
         <!--<script>
