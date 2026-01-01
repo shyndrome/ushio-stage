@@ -70,41 +70,49 @@
       <div class="topnews">
         <div id="news-detail"></div>
 
-        <div id="news-container"></div>
+        <ul class="newsline" id="news-list">
+          <!-- ここにDjangoの記事が入る -->
+        </ul>
 
         <script>
         fetch("https://ushio-news.onrender.com/api/news/")
-          .then(res => res.json())
+          .then(response => response.json())
           .then(data => {
-            const container = document.getElementById("news-container");
+            const list = document.getElementById("news-list");
 
-            data.forEach(article => {
-              const articleEl = document.createElement("article");
+            data.forEach(news => {
+              const li = document.createElement("li");
+              li.className = "newsarticle";
 
-              articleEl.innerHTML = `
-                <p class="date">${article.date}</p>
-                <h3>${article.title}</h3>
-                <div class="content">${article.content}</div>
+              li.innerHTML = `
+                <p class="date">${news.date}</p>
+
+                <h3 class="articlelink">
+                  ${news.title}
+                </h3>
+
+                <div class="content">
+                  ${news.content.replace(/\n/g, "<br>")}
+                </div>
 
                 <div class="images">
-                  ${article.images.map(img => `
+                  ${(news.images || []).map(img => `
                     <figure>
                       <img src="${img.image}" alt="">
                       ${img.caption ? `<figcaption>${img.caption}</figcaption>` : ""}
                     </figure>
                   `).join("")}
                 </div>
-
-                <hr>
               `;
 
-              container.appendChild(articleEl);
+              list.appendChild(li);
             });
+          })
+          .catch(error => {
+            console.error("ニュース取得エラー:", error);
           });
         </script>
-
-
-
+        
         <!--<script>
         const params = new URLSearchParams(window.location.search);
         const slug = params.get("slug");
