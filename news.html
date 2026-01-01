@@ -71,14 +71,14 @@
         <div id="news-detail"></div>
 
         <ul class="newsline" id="news-list">
-          <!-- ここにJSで自動挿入 -->
+          <!-- ここにDjangoの記事が入る -->
         </ul>
 
         <script>
           fetch("https://ushio-news.onrender.com/api/news/")
-            .then(res => res.json())
+            .then(response => response.json())
             .then(data => {
-              const ul = document.getElementById("news-list");
+              const list = document.getElementById("news-list");
 
               data.forEach(news => {
                 const li = document.createElement("li");
@@ -87,15 +87,20 @@
                 li.innerHTML = `
                   <p class="date">${news.date}</p>
                   <h3>
-                    <a href="news_detail.html?slug=${news.slug}" class="articlelink">
+                    <a href="news.html?slug=${news.slug}" class="articlelink">
                       ${news.title}
                     </a>
                   </h3>
                 `;
-                ul.appendChild(li);
+
+                list.appendChild(li);
               });
+            })
+            .catch(error => {
+              console.error("ニュース取得エラー:", error);
             });
         </script>
+
 
         <!--<script>
         const params = new URLSearchParams(window.location.search);
