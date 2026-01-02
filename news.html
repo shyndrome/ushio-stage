@@ -74,62 +74,51 @@
         </ul>
 
         <script>
-        // APIのベースURLを定義
-        const BASE_URL = "https://ushio-news.onrender.com";
+          window.onload = function() { // ページが全部読み込まれてから実行する
+            const BASE_URL = "https://ushio-news.onrender.com";
 
-        fetch(`${BASE_URL}/api/news/`)
-          .then(response => response.json())
-          .then(data => {
-            const list = document.getElementById("news-list");
-            // APIが単一のオブジェクトを返す場合でも配列として扱えるようにする
-            const newsArray = Array.isArray(data) ? data : [data];
+            fetch(`${BASE_URL}/api/news/`)
+              .then(response => {
+                console.log("Response status:", response.status); // 通信成否を確認
+                return response.json();
+              })
+              .then(data => {
+                console.log("取得したデータ:", data); // データが届いているか確認
+                const list = document.getElementById("news-list");
+                
+                if (!list) {
+                    console.error("エラー: id='news-list' がHTMLに見つかりません。");
+                    return;
+                }
 
-            // リストを一度クリア
-            list.innerHTML = '';
+                const newsArray = Array.isArray(data) ? data : [data];
+                list.innerHTML = '';
 
-            newsArray.forEach(news => {
-              // 本文の改行処理（\r\n を <br> に変換）
-              const contentHtml = news.content
-                ? news.content.replace(/\r?\n/g, "<br>")
-                : "";
+                newsArray.forEach(news => {
+                  const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
+                  let imagesHtml = "";
+                  if (Array.isArray(news.images) && news.images.length > 0) {
+                    imagesHtml = news.images.map(imgPath => {
+                      const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
+                      return `<figure class="centerphoto"><img src="${fullSrc}" class="newsphoto" style="max-width:100%;"></figure>`;
+                    }).join("");
+                  }
 
-              // 画像のHTML組み立て
-              let imagesHtml = "";
-              if (Array.isArray(news.images) && news.images.length > 0) {
-                imagesHtml = news.images.map(imgPath => {
-                  // すでにフルパス（http...）の場合はそのまま、相対パスの場合はドメインを付与
-                  const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
-                  return `
-                    <figure class="centerphoto">
-                      <img src="${fullSrc}" class="newsphoto" style="max-width:100%;">
-                    </figure>
+                  const li = document.createElement("li");
+                  li.className = "newsarticle";
+                  li.innerHTML = `
+                    <p class="date">${news.date}</p>
+                    <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title}</h3>
+                    <div class="images">${imagesHtml}</div>
+                    <div class="content" style="line-height: 1.6; margin-top: 15px;">${contentHtml}</div>
                   `;
-                }).join("");
-              }
-
-              // 記事1件分のHTML構造を作成
-              const li = document.createElement("li");
-              li.className = "newsarticle";
-              li.style.marginBottom = "40px"; // 記事ごとの余白
-
-              li.innerHTML = `
-                <p class="date">${news.date}</p>
-                <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title}</h3>
-                <div class="images">
-                  ${imagesHtml}
-                </div>
-                <div class="content" style="line-height: 1.6; margin-top: 15px;">
-                  ${contentHtml}
-                </div>
-              `;
-
-              list.appendChild(li);
-            });
-          })
-          .catch(error => {
-            console.error("ニュース取得エラー:", error);
-            document.getElementById("news-list").innerHTML = "<p>記事の読み込みに失敗しました。</p>";
-          });
+                  list.appendChild(li);
+                });
+              })
+              .catch(error => {
+                console.error("ニュース取得エラー:", error);
+              });
+        };
         </script>
         
         <!--<script>
