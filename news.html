@@ -1472,8 +1472,7 @@
     <script>
     window.onload = function() {
         const BASE_URL = "https://ushio-news.onrender.com";
-        // 取得先のURLを確認（一覧か、詳細か）
-        const API_URL = `${BASE_URL}/api/news/20230715/`; 
+        const API_URL = `${BASE_URL}/api/news/`;
 
         console.log("Fetching from:", API_URL);
 
@@ -1499,7 +1498,7 @@
             newsArray.forEach((news, index) => {
               console.log(`Processing news item ${index}:`, news.title);
 
-              const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
+              const contentHtml = news.content || "";
               
               let imagesHtml = "";
               if (news.images && Array.isArray(news.images)) {
@@ -1513,11 +1512,11 @@
               li.className = "newsarticle";
               li.style.listStyle = "none"; // 点を消す
               li.innerHTML = `
-                <p class="date" style="color: #666;">${news.date || ''}</p>
-                <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title || '無題'}</h3>
+                <p class="date">${news.date}</p>
+                <h3>${news.title}</h3>
                 <div class="images">${imagesHtml}</div>
-                <div class="content" style="line-height: 1.8; margin-top: 15px; white-space: normal;">
-                  ${contentHtml}
+                <div class="content">
+                  ${contentHtml} 
                 </div>
               `;
               list.appendChild(li);
