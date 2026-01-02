@@ -73,53 +73,7 @@
           <!-- ここにDjangoの記事が入る -->
         </ul>
 
-        <script>
-          window.onload = function() { // ページが全部読み込まれてから実行する
-            const BASE_URL = "https://ushio-news.onrender.com";
 
-            fetch(`${BASE_URL}/api/news/`)
-              .then(response => {
-                console.log("Response status:", response.status); // 通信成否を確認
-                return response.json();
-              })
-              .then(data => {
-                console.log("取得したデータ:", data); // データが届いているか確認
-                const list = document.getElementById("news-list");
-                
-                if (!list) {
-                    console.error("エラー: id='news-list' がHTMLに見つかりません。");
-                    return;
-                }
-
-                const newsArray = Array.isArray(data) ? data : [data];
-                list.innerHTML = '';
-
-                newsArray.forEach(news => {
-                  const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
-                  let imagesHtml = "";
-                  if (Array.isArray(news.images) && news.images.length > 0) {
-                    imagesHtml = news.images.map(imgPath => {
-                      const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
-                      return `<figure class="centerphoto"><img src="${fullSrc}" class="newsphoto" style="max-width:100%;"></figure>`;
-                    }).join("");
-                  }
-
-                  const li = document.createElement("li");
-                  li.className = "newsarticle";
-                  li.innerHTML = `
-                    <p class="date">${news.date}</p>
-                    <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title}</h3>
-                    <div class="images">${imagesHtml}</div>
-                    <div class="content" style="line-height: 1.6; margin-top: 15px;">${contentHtml}</div>
-                  `;
-                  list.appendChild(li);
-                });
-              })
-              .catch(error => {
-                console.error("ニュース取得エラー:", error);
-              });
-        };
-        </script>
         
         <!--<script>
         fetch("https://ushio-news.onrender.com/api/news/")
@@ -1515,5 +1469,52 @@
       </div>
     </div>
 
+            <script>
+          window.onload = function() { // ページが全部読み込まれてから実行する
+            const BASE_URL = "https://ushio-news.onrender.com";
+
+            fetch(`${BASE_URL}/api/news/`)
+              .then(response => {
+                console.log("Response status:", response.status); // 通信成否を確認
+                return response.json();
+              })
+              .then(data => {
+                console.log("取得したデータ:", data); // データが届いているか確認
+                const list = document.getElementById("news-list");
+                
+                if (!list) {
+                    console.error("エラー: id='news-list' がHTMLに見つかりません。");
+                    return;
+                }
+
+                const newsArray = Array.isArray(data) ? data : [data];
+                list.innerHTML = '';
+
+                newsArray.forEach(news => {
+                  const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
+                  let imagesHtml = "";
+                  if (Array.isArray(news.images) && news.images.length > 0) {
+                    imagesHtml = news.images.map(imgPath => {
+                      const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
+                      return `<figure class="centerphoto"><img src="${fullSrc}" class="newsphoto" style="max-width:100%;"></figure>`;
+                    }).join("");
+                  }
+
+                  const li = document.createElement("li");
+                  li.className = "newsarticle";
+                  li.innerHTML = `
+                    <p class="date">${news.date}</p>
+                    <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title}</h3>
+                    <div class="images">${imagesHtml}</div>
+                    <div class="content" style="line-height: 1.6; margin-top: 15px;">${contentHtml}</div>
+                  `;
+                  list.appendChild(li);
+                });
+              })
+              .catch(error => {
+                console.error("ニュース取得エラー:", error);
+              });
+        };
+        </script>
   </body>
 </html>
