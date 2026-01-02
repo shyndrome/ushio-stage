@@ -1469,52 +1469,66 @@
       </div>
     </div>
 
-            <script>
-          window.onload = function() { // ページが全部読み込まれてから実行する
-            const BASE_URL = "https://ushio-news.onrender.com";
+    <script>
+    window.onload = function() {
+        const BASE_URL = "https://ushio-news.onrender.com";
+        // 取得先のURLを確認（一覧か、詳細か）
+        const API_URL = `${BASE_URL}/api/news/20230715/`; 
 
-            fetch(`${BASE_URL}/api/news/`)
-              .then(response => {
-                console.log("Response status:", response.status); // 通信成否を確認
-                return response.json();
-              })
-              .then(data => {
-                console.log("取得したデータ:", data); // データが届いているか確認
-                const list = document.getElementById("news-list");
-                
-                if (!list) {
-                    console.error("エラー: id='news-list' がHTMLに見つかりません。");
-                    return;
-                }
+        console.log("Fetching from:", API_URL);
 
-                const newsArray = Array.isArray(data) ? data : [data];
-                list.innerHTML = '';
+        fetch(API_URL)
+          .then(response => {
+            console.log("HTTP Status:", response.status);
+            return response.json();
+          })
+          .then(data => {
+            console.log("Received Data:", data); // ←ここで中身がコンソールに出ます
+            
+            const list = document.getElementById("news-list");
+            if (!list) {
+                console.error("HTML Error: id='news-list' が見つかりません");
+                return;
+            }
 
-                newsArray.forEach(news => {
-                  const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
-                  let imagesHtml = "";
-                  if (Array.isArray(news.images) && news.images.length > 0) {
-                    imagesHtml = news.images.map(imgPath => {
-                      const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
-                      return `<figure class="centerphoto"><img src="${fullSrc}" class="newsphoto" style="max-width:100%;"></figure>`;
-                    }).join("");
-                  }
+            list.innerHTML = ''; // クリア
 
-                  const li = document.createElement("li");
-                  li.className = "newsarticle";
-                  li.innerHTML = `
-                    <p class="date">${news.date}</p>
-                    <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title}</h3>
-                    <div class="images">${imagesHtml}</div>
-                    <div class="content" style="line-height: 1.6; margin-top: 15px;">${contentHtml}</div>
-                  `;
-                  list.appendChild(li);
-                });
-              })
-              .catch(error => {
-                console.error("ニュース取得エラー:", error);
-              });
-        };
-        </script>
+            // データが配列（複数）か、単一のオブジェクトかを確認して統一
+            const newsArray = Array.isArray(data) ? data : [data];
+
+            newsArray.forEach((news, index) => {
+              console.log(`Processing news item ${index}:`, news.title);
+
+              const contentHtml = news.content ? news.content.replace(/\r?\n/g, "<br>") : "";
+              
+              let imagesHtml = "";
+              if (news.images && Array.isArray(news.images)) {
+                imagesHtml = news.images.map(imgPath => {
+                  const fullSrc = imgPath.startsWith('http') ? imgPath : `${BASE_URL}${imgPath}`;
+                  return `<figure class="centerphoto"><img src="${fullSrc}" class="newsphoto" style="max-width:100%;"></figure>`;
+                }).join("");
+              }
+
+              const li = document.createElement("li");
+              li.className = "newsarticle";
+              li.style.listStyle = "none"; // 点を消す
+              li.innerHTML = `
+                <p class="date" style="color: #666;">${news.date || ''}</p>
+                <h3 style="font-size: 1.5em; margin: 10px 0;">${news.title || '無題'}</h3>
+                <div class="images">${imagesHtml}</div>
+                <div class="content" style="line-height: 1.8; margin-top: 15px; white-space: normal;">
+                  ${contentHtml}
+                </div>
+              `;
+              list.appendChild(li);
+            });
+            
+            console.log("Render complete.");
+          })
+          .catch(error => {
+            console.error("Fetch Error:", error);
+          });
+    };
+    </script>
   </body>
 </html>
