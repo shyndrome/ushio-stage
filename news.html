@@ -83,20 +83,28 @@
               const li = document.createElement("li");
               li.className = "newsarticle";
 
+              const content = news.content
+                ? news.content.replace(/\r?\n/g, "<br>")
+                : "";
+
+              const imagesHtml = Array.isArray(news.images)
+                ? news.images.map(imgPath => `
+                    <figure class="centerphoto">
+                      <img src="https://ushio-news.onrender.com${imgPath}" class="newsphoto">
+                    </figure>
+                  `).join("")
+                : "";
+
               li.innerHTML = `
                 <p class="date">${news.date}</p>
                 <h3>${news.title}</h3>
 
                 <div class="content">
-                  ${news.content.replace(/\r?\n/g, "<br>")}
+                  ${content}
                 </div>
 
                 <div class="images">
-                  ${news.images.map(imgUrl => `
-                    <figure class="centerphoto">
-                      <img src="https://ushio-news.onrender.com/media${imgUrl}" class="newsphoto">
-                    </figure>
-                  `).join("")}
+                  ${imagesHtml}
                 </div>
               `;
 
@@ -107,6 +115,7 @@
             console.error("ニュース取得エラー:", error);
           });
         </script>
+
 
 
         <!--<script>
