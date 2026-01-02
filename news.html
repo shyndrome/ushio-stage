@@ -77,11 +77,11 @@
         fetch("https://ushio-news.onrender.com/api/news/")
           .then(response => response.json())
           .then(data => {
-            const list = document.getElementById("news-list");
 
-            data.forEach(news => {
-              const li = document.createElement("li");
-              li.className = "newsarticle";
+            const list = document.getElementById("news-list");
+            const newsArray = Array.isArray(data) ? data : [data];
+
+            newsArray.forEach(news => {
 
               const content = news.content
                 ? news.content.replace(/\r?\n/g, "<br>")
@@ -90,10 +90,13 @@
               const imagesHtml = Array.isArray(news.images)
                 ? news.images.map(imgPath => `
                     <figure class="centerphoto">
-                      <img src="https://ushio-news.onrender.com${imgPath}" class="newsphoto">
+                      <img src="https://ushio-news.onrender.com/media${imgPath}" class="newsphoto">
                     </figure>
                   `).join("")
                 : "";
+
+              const li = document.createElement("li");
+              li.className = "newsarticle";
 
               li.innerHTML = `
                 <p class="date">${news.date}</p>
@@ -115,8 +118,6 @@
             console.error("ニュース取得エラー:", error);
           });
         </script>
-
-
 
         <!--<script>
         const params = new URLSearchParams(window.location.search);
