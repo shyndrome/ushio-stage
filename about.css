@@ -1,0 +1,787 @@
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0 auto;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    letter-spacing: 1px;
+    color: #444;
+    background-image: url("背景用テクスチャ03.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+header {
+    width: 100%;
+    border-bottom: 0.5px solid #999;
+    z-index: 9999;
+}
+
+.headlogo {
+    text-align: center;
+}
+
+:root {
+    --blue01-color: #6e9ac1;
+    --blue02-color: #45A3F4;
+    --blue03-color: #86a6c3;
+}
+
+/*縦長、スマホ対応*/
+@media only screen and (max-width: 480px) {
+    .yokonaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+
+    .headlogo {
+        height: 70px;
+    }
+
+    header {
+        position: fixed;
+        background: url("背景用テクスチャ03.jpg");
+        background-size: cover;
+        height: 70px;
+        top: 0;
+        left: 0;
+    }
+
+    .toplogo {
+        width: 80px;
+        margin: 12.5px 0;
+    }
+
+    .pckiji {
+        width: 100%;
+        margin-top: 80px;
+    }
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 24px;
+    }
+    
+    .aboutushio, 
+    .aboutnagao,
+    .nagao_twi {
+        text-align: center;
+    }
+    
+    .aboutlogo {
+        width: 120px;
+    }
+    
+    .aboutarticle {
+        margin: 0 50px 20px;
+    }
+    
+    .aboutphoto,
+    .nagaophoto {
+        width: 230px;
+    }
+    
+    .photographer {
+        font-size: 10px;
+        text-align: right;
+        margin: 0 80px 0 0;
+    }
+    
+    .twi_logo {
+        width: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        height: 40px;
+        width: 40px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        /*background-color: var(--blue01-color);*/
+        filter: blur(0.5px);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 2px;
+        width: 30px;
+        /*background-color: #ffffff;*/
+        background-color: var(--blue01-color);
+        position: absolute;
+        transition: all 0.5s;
+        border-radius: 5px;
+    }
+    
+    .menu-btn span:before {
+        bottom: 10px;
+    }
+    
+    .menu-btn span:after {
+        top: 10px;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+        background-color: #fff;
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 70%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue03-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        overflow: auto;
+        padding: 80px 40px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.5px #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 20px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 12.5px 0;
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: bolder;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 30%;/*メニューを画面内へ*/
+        letter-spacing: 3px;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+  
+/*タブレット対応*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .tatenaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+    
+    .headlogo {
+        height: 90px;
+    }
+
+    header {
+        position: fixed;
+        background: url("背景用テクスチャ03.jpg");
+        background-size: cover;
+        height: 90px;
+        top: 0;
+        left: 0;
+    }
+
+    .toplogo {
+        height: 50px;
+        margin: 20px 0;
+        z-index: 0;
+    }
+
+    .div_ushiotop {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .ushiotop {
+        width: 100%;
+        margin: 90px auto 0;
+    }
+    
+    .photographer {
+        font-size: 10px;
+        text-align: right;
+        margin: 0 15px 0 0;
+    }
+    
+    .toplogo {
+        width: 80px;
+        margin: 12.5px 0;
+    }
+
+    .pckiji {
+        width: 100%;
+        margin-top: 100px;
+    }
+    
+    p {
+        font-size: 2.25vw;
+    }
+    
+    h2 {
+        font-size: 3.5vw;
+        text-align: center;
+        margin: 2.5vw 0;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+    }
+    
+    .topnews {
+        margin: 0 20px;
+        padding: 0 2.5vw;
+    }   
+    
+    h3 {
+        font-size: 12px;
+        font-weight: 400;
+    }
+    
+    .aboutushio, 
+    .aboutnagao,
+    .nagao_twi {
+        text-align: center;
+    }
+    
+    .aboutlogo {
+        width: 30vw;
+        margin: 2.5vw;
+    }
+    
+    .aboutarticle {
+        margin: 0 12.5vw 20px 12.5vw;
+    }
+    
+    .aboutphoto {
+        width: 60vw;
+    }
+
+    .nagaophoto {
+        width: 50vw;
+    }
+    
+    .photographer {
+        font-size: 2.5vw;
+        text-align: right;
+        margin: 0 25vw 0 0;
+    }
+    
+    .twi_logo {
+        width: 7.5vw;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        height: 50px;
+        width: 50px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        /*background-color: var(--blue01-color);*/
+        filter: blur(0.5px);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 2px;
+        width: 30px;
+        /*background-color: #ffffff;*/
+        background-color: var(--blue01-color);
+        position: absolute;
+        transition: all 0.5s;
+        border-radius: 5px;
+    }
+    
+    .menu-btn span:before {
+        bottom: 10px;
+    }
+    
+    .menu-btn span:after {
+        top: 10px;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+        background-color: #fff;
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 60%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue03-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        overflow: auto;
+        padding: 60px 40px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.5px #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 20px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 12.5px 0;
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: bolder;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 40%;/*メニューを画面内へ*/
+        letter-spacing: 3px;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 769px) and (max-width: 1024px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+    
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 20px 5.5vw 20px 4.5vw;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .aboutushio, 
+    .aboutnagao,
+    .nagao_twi {
+        text-align: center;
+    }
+    
+    .aboutlogo {
+        width: 20vw;
+    }
+    
+    .aboutarticle {
+        margin: 0 12.5vw 20px 12.5vw;
+    }
+    
+    .aboutphoto {
+        width: 20vw;
+    }
+    .nagaophoto {
+        width: 30vw;
+    }
+    
+    .photographer {
+        font-size: 1.5vw;
+        text-align: right;
+        margin: 0 20vw 0 0;
+    }
+    
+    .twi_logo {
+        width: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1025px) and (max-width: 1599px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 5.5vw 2.5vw 4.5vw;
+    }
+    
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .aboutushio, 
+    .aboutnagao,
+    .nagao_twi {
+        text-align: center;
+    }
+    
+    .aboutlogo {
+        width: 20vw;
+    }
+    
+    .aboutarticle {
+        margin: 0 12.5vw 20px 12.5vw;
+    }
+    
+    .aboutphoto {
+        width: 20vw;
+    }
+    .nagaophoto {
+        width: 30vw;
+    }
+    
+    .photographer {
+        font-size: 1.5vw;
+        text-align: right;
+        margin: 0 20vw 0 0;
+    }
+    
+    .twi_logo {
+        width: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }     
+
+    #menu-btn-check {
+        display: none;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1600px){
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+        display: none;
+    }
+    
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 10vw;
+        margin: 2.5vw;
+    } 
+    
+    .ushiotop {
+        width: 75vw;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    p {
+        font-size: 1.25vw;
+    }
+    
+    h2 {
+        font-size: 12px;
+        font-weight: 400;
+        text-align: center;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        padding: 2.5vw 0;
+    }
+
+    .pckiji {
+        width: 70vw;
+        margin: 0 0 0 30vw;
+        background-color: rgba(255, 255, 255, 0.85);
+    }
+    
+    .aboutushio, 
+    .aboutnagao,
+    .nagao_twi {
+        text-align: center;
+    }
+    
+    .aboutlogo {
+        width: 20vw;
+    }
+    
+    .aboutarticle {
+        margin: 0 12.5vw 20px 12.5vw;
+    }
+    
+    .aboutphoto {
+        width: 20vw;
+    }
+    .nagaophoto {
+        width: 30vw;
+    }
+    
+    .photographer {
+        font-size: 1.5vw;
+        text-align: right;
+        margin: 0 20vw 0 0;
+    }
+    
+    .twi_logo {
+        width: 12px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw 20px;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 1.75vw;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+}

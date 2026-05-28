@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <link href="index.css" rel="stylesheet" type="text/css" media="all">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+      <meta name="keywords" content="う潮,ながおあいり,演劇,劇団,うしお,潮,劇作家,演出家,脚本家">
+      <link rel="canonical" href="https://www.ushio-stage.com/">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="index.js"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="google-site-verification" content="QKsXajOE1ClrZFmArVBXKb_iYR80n3-jADjgOLxzS4E" />
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" sizes="any">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
+      <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
+      <title>う潮</title>
+  </head>
+  <body>
+
+    <div id="header_fetch_target"></div>
+
+    <div class="div_ushiotop">
+      <img src="ushiotop.jpg" class="ushiotop">
+      <p class="photographer tatenaga">撮影:黄木日菜子</p>
+      <p class="photographer yokonaga">撮影:黄木日菜子</p>
+    </div>
+
+    <div class="karishiro">
+
+      <p class="photographer pcnaga">撮影:黄木日菜子</p>
+
+    <div class="tatenaga">
+      <div class="nextstage">
+        <h2><span class="newstitle">Topic</span></h2>
+        <a href="news.html">
+          <img src="すいか本チラシ表.jpg" class="top_next_ver">
+        </a>
+      </div>
+
+      <div class="topnews">
+        <h2><span class="newstitle">News</span></h2>
+        <ul class="newsline" id="top-news"></ul>
+
+          <script>
+          fetch("https://ushio-news.onrender.com/api/news/")
+            .then(res => res.json())
+            .then(data => {
+              const ul = document.getElementById("top-news");
+
+              data.slice(0,4).forEach(item => {
+                const li = document.createElement("li");
+                li.className = "newsarticle";
+
+                li.innerHTML = `
+                  <p class="date">${item.date}</p>
+                  <h3>
+                    <a href="news.html?slug=${item.slug}" class="articlelink">
+                      ${item.title}
+                    </a>
+                  </h3>
+                `;
+
+                ul.appendChild(li);
+              });
+            });
+          </script>
+      </div>
+    </div>
+
+    <div class="yokonaga">
+      <table class="tandc_col2">
+        <tr>
+          <td>
+            <div class="topnews">
+              <h2><span class="newstitle">Topic</span></h2>
+              <div class="topic_pic">
+                <a href="news.html">
+                  <img src="すいか本チラシ表.jpg" class="top_next_ver">
+                </a><!--横ならtopnext, 縦ならtopnextver-->
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="topnews">
+              <h2><span class="newstitle">News</span></h2>
+              <ul class="newsline" id="top-news"></ul>
+
+              <script>
+              fetch("https://ushio-news.onrender.com/api/news/")
+                .then(res => res.json())
+                .then(data => {
+                  const ul = document.getElementById("top-news");
+
+                  data.slice(0,4).forEach(item => {
+                    const li = document.createElement("li");
+                    li.className = "newsarticle";
+
+                    li.innerHTML = `
+                      <p class="date">${item.date}</p>
+                      <h3>
+                        <a href="news.html?slug=${item.slug}" class="articlelink">
+                          ${item.title}
+                        </a>
+                      </h3>
+                    `;
+
+                    ul.appendChild(li);
+                  });
+                });
+              </script>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="pcnaga">
+      <table>
+        <tr>
+          <td class="lefttd">
+            <div class="nextstage">
+              <a href="news.html"><img src="すいか本チラシ表.jpg" class="top_next_ver"></a><!--横ならtopnext, 縦ならtopnextver-->
+            </div>
+          </td>
+          <td class="righttd">
+            <div class="topnews">
+              <h2><span class="newstitle">News</span></h2>
+              <ul class="newsline" id="top-news"></ul>
+
+              <script>
+              fetch("https://ushio-news.onrender.com/api/news/")
+                .then(res => res.json())
+                .then(data => {
+                  const ul = document.getElementById("top-news");
+
+                  data.slice(0,4).forEach(item => {
+                    const li = document.createElement("li");
+                    li.className = "newsarticle";
+
+                    li.innerHTML = `
+                      <p class="date">${item.date}</p>
+                      <h3>
+                        <a href="news.html?slug=${item.slug}" class="articlelink">
+                          ${item.title}
+                        </a>
+                      </h3>
+                    `;
+
+                    ul.appendChild(li);
+                  });
+                });
+              </script>
+
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="official_twi">
+      <a href="https://twitter.com/Ushio_stage">
+        <img src="x_logo.png" class="twi_logo">
+      </a>
+    </div>
+
+    <div class="tokusho-btn">
+      <p class="tp">特定商取引法に基づく表記</p>
+    </div>
+
+    <div class="tokusho">
+      <p class="kisai">[販売事業者]
+        <br>演劇ユニット う潮</p>
+      
+      <p class="kisai">[代表者名]
+        <br>関美穂</p>
+      
+      <p class="kisai">[所在地]
+        <br>請求があった場合、遅滞なく開示いたします。</p>
+      
+      <p class="kisai">[連絡先]
+        <br>請求があった場合、遅滞なく開示いたします。</p>
+      
+      <p class="kisai">[メールアドレス]
+        <br>ushio.stage@gmail.com</p>
+      
+      <p class="kisai">[商品価格・その他費用]
+        <br>商品価格は取扱ページと決済前ページに掲載しております。
+        <br>商品の特性上、送料は発生いたしません。</p>
+      
+      <p class="kisai">[代金の支払い時期]
+        <br>予約完了時</p>
+      
+      <p class="kisai">[代金の支払い方法]
+        <br>クレジットカード決済（VISA、Master、JCB）Apple Pay、Google Pay</p>
+
+      <p class="kisai">[商品等の引渡時期]
+        <br>ご予約いただいた日時に現地にて入場していただけます。</p>
+      
+      <p class="kisai">[返品・キャンセル]
+        <br>原則キャンセル不可</p>
+      
+      <p class="kisai">[商品に関する注意事項]
+        <br>予定の公演が主催者都合を含む何らかの事情で変更・中止になった場合は、
+        <br>返金をもって対応いたします。</p>
+    </div>
+    </div>
+  </body>
+</html>
