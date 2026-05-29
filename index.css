@@ -65,10 +65,11 @@ body {
     }
     .contents {
         top: 100vh;
+        min-height: 100vh;
         position: absolute;
         width: calc(0.90 * (100% - 300px));
         left: calc(300px + (0.05 * (100% - 300px)));
-        margin: 50px 0; 
+        margin: 25px 0 50px;
         padding: 50px 20px;
         background-color: rgba(255, 255, 255, 0.8);
         box-sizing: border-box;
@@ -88,6 +89,17 @@ body {
         text-align: center;
     }
 
+    .div_box_single {
+        width: 80%;
+        max-width: 800px;
+        margin: 20px auto 40px;
+        text-align: center;
+    }
+
+    .div_box_single p {
+        text-align: left;
+    }
+
     .div_box_2 {
         flex-direction: row;
         width: 300px;
@@ -105,13 +117,23 @@ body {
         width: 100%;
     }
 
+    .div_box_single .photographer_text {
+        width: 230px;
+        text-align: right;
+        margin: 5px auto;
+        padding: 0;
+    }
+
+}
+
+h1,
+h2 {
+    text-align: center;
 }
 
 .photographer_text {
-    width: 90%;
-    margin-right: auto;
+    text-align: right;
     font-size: 10px;
-    padding: 20px;
 }
 
 .div_box_2 ul {
