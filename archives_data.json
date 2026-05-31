@@ -1,0 +1,23 @@
+[
+    {
+        "id": "03_suika2025",
+        "news_id": "20250113",
+        "title": "すいかの種の黒黒",
+        "dayAndVenue": "2025/2/27 - 3/2　阿佐ヶ谷アルシェ",
+        "image": "すいか本チラシ表.jpg"
+    },
+    {
+        "id": "02_shissou",
+        "news_id": "20240630",
+        "title": "疾走",
+        "dayAndVenue": "2024/9/27 - 29　スタジオ空洞",
+        "image": "疾走　本表.jpg"
+    },
+    {
+        "id": "01_fukachan",
+        "news_id": "20230715",
+        "title": "ふうかちゃん",
+        "dayAndVenue": "2023/9/8 - 10　サブテレニアン",
+        "image": "ふうかちゃん表.jpg"
+    }
+]

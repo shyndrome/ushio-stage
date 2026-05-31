@@ -1,0 +1,1152 @@
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0 auto;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    letter-spacing: 1px;
+    color: #444;
+    background-image: url("背景用テクスチャ03.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+:root {
+    --blue01-color: #6e9ac1;
+    --blue02-color: #45A3F4;
+    --blue03-color: #86a6c3;
+}
+
+/*縦長、スマホ対応*/
+@media only screen and (max-width: 480px) {
+    .yokonaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+
+    .headlogo {
+        height: 70px;
+    }
+
+    header {
+        position: fixed;
+        background: url("背景用テクスチャ03.jpg");
+        background-size: cover;
+    }
+
+    .toplogo {
+        width: 80px;
+        margin: 12.5px 0;
+    }
+    
+    .ushiotop {
+        width: 100%;
+        margin: 70px auto 0;
+    }
+    
+    .photographer {
+        font-size: 10px;
+        text-align: right;
+        margin: 0 10px 0 0;
+    }
+    
+    .top_next {
+        width: 50%;
+        margin: 10px 0;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .top_next_ver {
+        width: 50%;
+        margin: 10px 0;
+        box-shadow: 0 0 1px #444;
+    }
+    
+    .nextstage {
+        text-align: center;
+    }
+    
+    .topnews {
+        margin: 15px 20px 0;
+        border: 1px var(--blue01-color) solid;
+        background-color: #fff;
+        padding: 0 12.5px;
+        box-shadow: 0px 0px 0.5px 0.5px var(--blue01-color), 0px 0px 0.5px 0.5px var(--blue01-color) inset;
+        border-radius: 10px;
+    }
+    
+    .official_twi {
+        text-align: center;
+    }
+    
+    .twi_logo {
+        width: 30px;
+        margin: 20px 0 10px;
+        text-align: center;
+    }
+    
+    .date {
+        font-size: 12px;
+    }
+    
+    .newstitle {
+        font-size: 20px;
+        border-bottom: 0.5px dotted var(--blue01-color);
+    }
+    
+    h2 {
+        text-align: center;
+        margin: 20px 0;
+    }
+    
+    h3 {
+        font-size: 12px;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.5px dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        background-color: #fff;
+        padding: 10px;
+    }
+    
+    .plusnews {
+        text-align: right;
+        padding: 10px 10px 0 10px;
+        font-size: 12px;
+        margin: 0;
+    }
+    
+    a {
+        color: #333;
+    }
+    
+    .articlelink {
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        display: flex;
+        height: 40px;
+        width: 40px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        /*background-color: var(--blue01-color);*/
+        filter: blur(0.5px);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 2px;
+        width: 30px;
+        /*background-color: #ffffff;*/
+        background-color: var(--blue01-color);
+        position: absolute;
+        transition: all 0.5s;
+        border-radius: 5px;
+    }
+    
+    .menu-btn span:before {
+        bottom: 10px;
+    }
+    
+    .menu-btn span:after {
+        top: 10px;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+        background-color: #fff;
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 70%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue03-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        overflow: auto;
+        padding: 80px 40px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.5px #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 20px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 12.5px 0;
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: bolder;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 30%;/*メニューを画面内へ*/
+        letter-spacing: 3px;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+    
+    
+    p {
+        font-size: 15px;
+    }
+    
+    .tokusho-btn {
+        display: inline-block;
+        font-size: 9px;
+        cursor: pointer;
+        width: 100%;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 7px;
+        display: none;
+        padding: 5px 0;
+    }
+    
+    .tp {
+        text-align: center;
+        margin: 2.5px 0 20px;
+        font-size: 12px;
+    }
+      
+    .kisai {
+        font-size: 8px;
+        text-align: left;
+        margin: 10px 20px;
+    }
+      
+    .is-active {
+        display: block;
+    }
+}
+  
+/*タブレット対応*/
+@media only screen and (min-width: 481px) and (max-width: 768px) {
+    .tatenaga {
+        display: none;
+    }
+
+    .pcnaga {
+        display: none;
+    }
+
+    .headlogo {
+        height: 90px;
+    }
+
+    header {
+        position: fixed;
+        background-image: url("背景用テクスチャ03.jpg");
+        background-size: cover;
+    }
+
+    .toplogo {
+        height: 50px;
+        margin: 20px 0;
+        z-index: 0;
+    }
+
+    .div_ushiotop {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .ushiotop {
+        width: 100%;
+        margin: 90px auto 0;
+    }
+    
+    .photographer {
+        font-size: 10px;
+        text-align: right;
+        margin: 0 15px 0 0;
+    }
+
+    .tandc_col2 {
+        margin: 20px auto 10px;
+        width: 90%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .topic_pic {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .top_next_ver {
+        width: 90%;
+        max-width: 218px;
+        max-height: 303px;
+        margin: 0 0;
+        box-shadow: 0 0 1px #444;
+    }
+
+    td {
+        width: 50%;
+        text-align: center;
+    }
+    
+    .nextstage {
+        margin: 12.5px;
+        width: 40%;
+    }
+    
+    .topnews {
+        position: relative;
+        width: 85%;
+        margin: 0 auto;
+        height: 100%;
+        border: 0.25px var(--blue01-color) solid;
+        background-color: #fff;
+        padding: 0 12.5px;
+        box-shadow: 0px 0px 0.5px 0.5px var(--blue01-color), 0px 0px 0.5px 0.5px var(--blue01-color) inset;
+        border-radius: 15px;
+    }
+
+    .official_twi {
+        text-align: center;
+    }
+    
+    .twi_logo {
+        width: 30px;
+        margin: 10px 0 10px;
+        text-align: center;
+    }
+    
+    .date {
+        font-size: 12px;
+        text-align: left;
+    }
+    
+    .newstitle {
+        font-size: 20px;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 15px;
+        text-align: center;
+        margin: 2.5vw 0;
+    }
+    
+    h3 {
+        font-size: 10px;
+        text-align: left;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        background-color: #fff;
+        padding: 0vw 1.25vw;
+    }
+    
+    .plusnews {
+        text-align: right;
+        padding: 2.5vw 2.5vw 0vw 2.5vw;
+        font-size: 8px;
+        margin: 0;
+    }
+
+    table {
+        text-align: center;
+        margin: 2.5vw 0;
+    }
+    
+    a {
+        color: #333;
+    }
+    
+    .articlelink {
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    .menu-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        height: 50px;
+        width: 50px;
+        justify-content: center;
+        align-items: center;
+        z-index: 90;
+        /*background-color: var(--blue01-color);*/
+        filter: blur(0.5px);
+    }
+    
+    .menu-btn span,
+    .menu-btn span:before,
+    .menu-btn span:after {
+        content:" ";
+        display: block;
+        height: 2px;
+        width: 30px;
+        /*background-color: #ffffff;*/
+        background-color: var(--blue01-color);
+        position: absolute;
+        transition: all 0.5s;
+        border-radius: 5px;
+    }
+    
+    .menu-btn span:before {
+        bottom: 10px;
+    }
+    
+    .menu-btn span:after {
+        top: 10px;
+    }
+    
+    #menu-btn-check:checked ~ .menu-btn span {
+        background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+    }
+    #menu-btn-check:checked ~ .menu-btn span::before {
+        bottom: 0;
+        transform: rotate(45deg);
+        background-color: #fff;
+    }
+    #menu-btn-check:checked ~ .menu-btn span::after {
+        top: 0;
+        transform: rotate(-45deg);
+        background-color: #fff;
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 60%;
+        position: fixed;
+        top: 0;
+        left: 100%;
+        z-index: 80;
+        background-color: var(--blue03-color);
+        transition: all 1s;
+    }
+    
+    .menu-content ul {
+        overflow: auto;
+        padding: 60px 40px 0;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.5px #fff;
+        list-style: none;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 20px;
+        box-sizing: border-box;
+        color:#fff;
+        text-decoration: none;
+        padding: 12.5px 0;
+        letter-spacing: 3px;
+        text-align: center;
+        font-weight: bolder;
+    }
+    
+    #menu-btn-check:checked ~ .menu-content {
+        left: 40%;/*メニューを画面内へ*/
+        letter-spacing: 3px;
+    }
+    
+    #menu-btn-check {
+        display: none;
+    }
+    
+    p {
+        font-size: 8px;
+    }
+    
+    .tokusho-btn {
+        display: inline-block;
+        cursor: pointer;
+        width: 100%;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 1.75vw;
+        display: none;
+        padding: 1.25vw 0;
+    }
+
+    .tp {
+        text-align: center;
+        margin: 2.5px 0 20px;
+        font-size: 12px;
+    }
+      
+    .kisai {
+        font-size: 1.75vw;
+        text-align: left;
+        margin: 2.5vw 20px;
+    }
+      
+    .is-active {
+        display: block;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 769px) and (max-width: 1024px){  
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+      display: none;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        width: auto;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 20px 5.5vw 20px 4.5vw;
+    }
+
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    .photographer {
+        position: absolute;
+        margin: 2.5vw 1.25vw 0 55vw;
+        font-size: 1.5vw;
+        z-index: 1;
+    }
+    
+    .top_next {
+        width: 32.5vw;
+        margin: 2.5vw 0;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .top_next_ver {
+        width: 31vw;
+        margin: 2.75vw 0 2.5vw;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .lefttd {
+        width: 35vw;
+    }
+
+    .righttd {
+        width: 35vw;
+    }
+
+    .karishiro {
+        top: 100vh;
+        position: absolute;
+        width: 70vw;
+        padding: 12px 0;
+        margin: 0vw 0vw 0vw 30vw;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    table {
+        padding: 7.5vw 0 0;
+    }
+    
+    .nextstage {
+        text-align: center;
+    }
+    
+    .topnews {
+        margin: 0 1.25vw;
+        border: 0.5px var(--blue01-color) solid;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 0 1.25vw;
+        box-shadow: 0px 0px 0.05vw 0.05vw var(--blue01-color), 0px 0px 0.05vw 0.05vw var(--blue01-color) inset;
+    }
+    
+    .official_twi {
+        text-align: center;
+        margin: 2.5vw 0 1.25vw;
+    }
+    
+    .twi_logo {
+        width: 16px;
+        margin: 1vw 0;
+        text-align: center;
+    }
+    
+    .date {
+        font-size: 1.5vw;
+    }
+    
+    .newstitle {
+        font-size: 2.5vw;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 12px;
+        text-align: center;
+        margin: 2.5vw 1.25vw 0;
+    }
+    
+    h3 {
+        font-size: 1.5vw;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        padding: 0 1.25vw;
+    }
+    
+    .plusnews {
+        text-align: right;
+        padding: 1.25vw 2.5vw 0vw 2.5vw;
+        font-size: 1.5vw;
+        margin: 0;
+    }
+    
+    a {
+        color: #333;
+    }
+    
+    .articlelink {
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }     
+
+    #menu-btn-check {
+        display: none;
+    }
+    
+    
+    .tokusho-btn {
+        display: inline-block;
+        font-size: 1.5vw;
+        cursor: pointer;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 1.75vw;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 0 2.5vw 0vw;
+    }
+    
+    .tp {
+        text-align: center;
+        width: 70vw;
+    }
+      
+    .kisai {
+        font-size: 1vw;
+        text-align: center;
+        margin: 0vw 2.5vw 1.25vw;
+        padding: 1.25vw;
+    }
+      
+    .is-active {
+        display: block;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1025px) and (max-width: 1599px){  
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+      display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 15vw;
+        margin: 2.5vw 5.5vw 2.5vw 4.5vw;
+    }
+    
+    .ushiotop {
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    .photographer {
+        position: absolute;
+        margin: 2.5vw 1.25vw 0 55vw;
+        font-size: 1.5vw;
+        z-index: 1;
+    }
+    
+    .top_next {
+        width: 32.5vw;
+        margin: 2.5vw 0;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .top_next_ver {
+        width: 30.75vw;
+        margin: 2.75vw 0 2.5vw;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .lefttd {
+        width: 35vw;
+    }
+
+    .righttd {
+        width: 35vw;
+    }
+
+    .karishiro {
+        top: 100vh;
+        position: absolute;
+        width: 70vw;
+        padding: 0;
+        margin: 0vw 0vw 0vw 30vw;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    table {
+        padding: 7.5vw 0 0;
+    }
+    
+    .nextstage {
+        text-align: center;
+    }
+    
+    .topnews {
+        margin: 0 1.25vw;
+        border: 0.5px var(--blue01-color) solid;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 0 1.25vw;
+        box-shadow: 0px 0px 0.05vw 0.05vw var(--blue01-color), 0px 0px 0.05vw 0.05vw var(--blue01-color) inset;
+    }
+    
+    .official_twi {
+        text-align: center;
+        margin: 2.5vw 0 1.25vw;
+    }
+    
+    .twi_logo {
+        width: 16px;
+        margin: 1vw 0;
+        text-align: center;
+    }
+    
+    .date {
+        font-size: 1.5vw;
+    }
+    
+    .newstitle {
+        font-size: 2.5vw;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 12px;
+        text-align: center;
+        margin: 2.5vw 1.25vw 0;
+    }
+    
+    h3 {
+        font-size: 1.5vw;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        padding: 0 1.25vw;
+    }
+    
+    .plusnews {
+        text-align: right;
+        padding: 1.25vw 2.5vw 0vw 2.5vw;
+        font-size: 1.5vw;
+        margin: 0;
+    }
+    
+    a {
+        color: #333;
+    }
+    
+    .articlelink {
+        text-decoration: none;
+    }
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 8px;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1.5vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+        color: #444;
+    }     
+
+    #menu-btn-check {
+        display: none;
+    }
+    
+    
+    .tokusho-btn {
+        display: inline-block;
+        font-size: 1.5vw;
+        cursor: pointer;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 1.75vw;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 0 2.5vw 0vw;
+    }
+    
+    .tp {
+        text-align: center;
+        width: 70vw;
+    }
+      
+    .kisai {
+        font-size: 1vw;
+        text-align: center;
+        margin: 0vw 2.5vw 1.25vw;
+        padding: 1.25vw;
+    }
+      
+    .is-active {
+        display: block;
+    }
+}
+
+/*pc対応 プラスα*/
+@media only screen and (min-width: 1600px){  
+    .tatenaga {
+        display: none;
+    }
+
+    .yokonaga {
+      display: none;
+    }
+
+    .headlogo {
+        text-align: center;
+        z-index: 1;
+    }
+
+    .toplogo {
+        width: 10vw;
+        margin: 2.5vw;
+    }
+    
+    .ushiotop {
+        width: 75vw;
+        margin: 0;
+        padding: 0;
+        left: 25vw;
+        position: fixed;
+        z-index: -1;
+    }
+    
+    .photographer {
+        position: absolute;
+        margin: 2.5vw 1.25vw 0 55vw;
+        font-size: 1.5vw;
+        z-index: 1;
+    }
+    
+    .top_next {
+        width: 32.5vw;
+        margin: 2.5vw 0;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .top_next_ver {
+        width: 30.5vw;
+        margin: 2.8vw 0 2.5vw;
+        box-shadow: 0 0 0.25vw #444;
+    }
+
+    .lefttd {
+        width: 35vw;
+    }
+
+    .righttd {
+        width: 35vw;
+    }
+
+    .karishiro {
+        top: 100vh;
+        position: absolute;
+        width: 70vw;
+        padding: 0;
+        margin: 0vw 0vw 0vw 30vw;
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    table {
+        padding: 7.5vw 0 0;
+    }
+    
+    .nextstage {
+        text-align: center;
+    }
+    
+    .topnews {
+        margin: 0 1.25vw;
+        border: 0.5px var(--blue01-color) solid;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 0 1.25vw;
+        box-shadow: 0px 0px 0.05vw 0.05vw var(--blue01-color), 0px 0px 0.05vw 0.05vw var(--blue01-color) inset;
+    }
+    
+    .official_twi {
+        text-align: center;
+        margin: 2.5vw 0 1.25vw;
+    }
+    
+    .twi_logo {
+        width: 16px;
+        margin: 1vw 0;
+        text-align: center;
+    }
+    
+    .date {
+        font-size: 1.5vw;
+    }
+    
+    .newstitle {
+        font-size: 2.5vw;
+        border-bottom: 0.25vw dotted var(--blue01-color);
+    }
+    
+    h2 {
+        font-size: 12px;
+        text-align: center;
+        margin: 2.5vw 1.25vw 0;
+    }
+    
+    h3 {
+        font-size: 1.5vw;
+    }
+    
+    .newsarticle {
+        border-bottom: 0.25vw dotted var(--blue01-color);
+        list-style: none;
+    }
+    
+    .newsline {
+        padding: 0 1.25vw;
+    }
+    
+    .plusnews {
+        text-align: right;
+        padding: 1.25vw 2.5vw 0vw 2.5vw;
+        font-size: 1.5vw;
+        margin: 0;
+    }
+    
+    a {
+        color: #333;
+    }
+    
+    .articlelink {
+        text-decoration: none;
+    }
+    
+    /*メニュー*/
+    
+    /*中身自体*/
+    .menu-content {
+        height: 100%;
+        width: 30vw;
+        position: fixed;
+        top: 0;
+        z-index: 0;
+        text-align: center;
+        background-color: #fff;
+    }
+    
+    .menu-content ul {
+        margin: 0;
+        padding: 2.5vw 20px;
+        text-align: center;
+    }
+    .menu-content ul li {
+        border-bottom: solid 0.125vw #444;
+        list-style: none;
+        text-align: center;
+    }
+    .menu-content ul li a {
+        display: block;
+        font-size: 1.75vw;
+        box-sizing: border-box;
+        text-decoration: none;
+        padding: 1vw;
+        letter-spacing: 0.5vw;
+        text-align: center;
+    }    
+
+    #menu-btn-check {
+        display: none;
+    }
+    
+    
+    .tokusho-btn {
+        display: inline-block;
+        font-size: 1.5vw;
+        cursor: pointer;
+    }
+      
+    .tokusho {
+        margin: 0 20px;
+        font-size: 1.75vw;
+        display: none;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 0 2.5vw 0vw;
+    }
+    
+    .tp {
+        text-align: center;
+        width: 70vw;
+    }
+      
+    .kisai {
+        font-size: 1vw;
+        text-align: center;
+        margin: 0vw 2.5vw 1.25vw;
+        padding: 1.25vw;
+    }
+      
+    .is-active {
+        display: block;
+    }
+}

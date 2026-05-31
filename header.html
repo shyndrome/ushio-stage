@@ -1,0 +1,278 @@
+<!-- header.html -->
+<header>
+    <style>
+        .div_header {
+            background-image: url("背景用テクスチャ03.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            top: 0;
+            padding: 0;
+            position: fixed;
+            box-shadow: 0 0 1px #666;
+            z-index: 99;
+        }
+        @media only screen and (max-width: 799px){
+            .for_phone {
+                display: block;
+            }
+            .for_pc {
+                display: none;
+            }
+            .div_header {
+                top: 0;
+                left: 0;
+                height: 80px;
+                width: 100%;
+                padding: 0;
+                border-bottom: 0.5px solid #999;
+                z-index: 99;
+            }
+            .div_header a {
+                display: flex;
+                text-align: center;
+                width: 90px;
+                height: 80px;
+                margin: auto;
+            }
+
+            .div_header a .header_logo_image {
+                display: flex;
+                width: 90px;
+                margin: auto;
+            }
+        }
+        @media only screen and (min-width: 800px){
+            .for_phone {
+                display: none;
+            }
+            .for_pc {
+                display: block;
+            }
+            .div_header {
+                position: static;
+                background-image: none;
+                box-shadow: none;
+            }
+            .header_logo_image {
+                display: flex;
+                width: 120px;
+                margin: 20px auto;
+            }
+        }
+    </style>
+    <!--メニュー for_phone-->
+    <style>
+        .menu-btn {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            display: flex;
+            height: 40px;
+            width: 40px;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            filter: blur(0.5px);
+        }
+        
+        .menu-btn span,
+        .menu-btn span:before,
+        .menu-btn span:after {
+            content:" ";
+            display: block;
+            height: 2px;
+            width: 30px;
+            /*background-color: #ffffff;*/
+            background-color: var(--blue01-color);
+            position: absolute;
+            transition: all 0.5s;
+            border-radius: 5px;
+        }
+        
+        .menu-btn span:before {
+            bottom: 10px;
+        }
+        
+        .menu-btn span:after {
+            top: 10px;
+        }
+        
+        #menu-btn-check:checked ~ .menu-btn span {
+            background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+        }
+        #menu-btn-check:checked ~ .menu-btn span::before {
+            bottom: 0;
+            transform: rotate(45deg);
+            background-color: #fff;
+        }
+        #menu-btn-check:checked ~ .menu-btn span::after {
+            top: 0;
+            transform: rotate(-45deg);
+            background-color: #fff;
+        }
+        
+        /*中身自体*/
+        .menu-content {
+            height: 100%;
+            width: 70%;
+            position: fixed;
+            top: 0;
+            left: 100%;
+            z-index: 80;
+            background-color: var(--blue03-color);
+            transition: all 1s;
+            box-shadow: 0 0 3px #c7c4bc;
+        }
+        
+        .menu-content ul {
+            overflow: auto;
+            padding: 80px 40px 0;
+        }
+        .menu-content ul li {
+            border-bottom: solid 0.5px #fff;
+            list-style: none;
+        }
+        .menu-content ul li a {
+            display: inline-block;
+            font-size: 20px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            color:#fff;
+            text-decoration: none;
+            padding: 17.5px 0;
+            letter-spacing: 3px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: normal;
+        }
+        
+        #menu-btn-check:checked ~ .menu-content {
+            left: 30%;/*メニューを画面内へ*/
+            letter-spacing: 3px;
+        }
+        
+        #menu-btn-check {
+            display: none;
+        }
+
+        @media only screen and (min-width: 800px){
+            .header_and_image {
+                display: flex;
+            }
+            .menu-content {
+                height: 100%;
+                width: 300px;
+                background-image: url("背景用テクスチャ03.jpg");
+                background-size: contain;
+                background-attachment: fixed;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 80;
+                background-color: var(--blue03-color);
+                transition: all 1s;
+                box-shadow: 0 0 3px #c7c4bc;
+                overflow-y: scroll;
+            }
+            .menu-content ul {
+                overflow: auto;
+                padding: 20px 40px 0;
+            }
+            .menu-content ul li {
+                border-bottom: solid 0.5px #403f3e;
+                list-style: none;
+            }
+            .menu-content ul li a {
+                display: inline-block;
+                font-size: 20px;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                color:#403f3e;
+                text-decoration: none;
+                padding: 17.5px 0;
+                letter-spacing: 3px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .div_main_image {
+                min-height: 100%;
+                position: fixed;
+                left: 300px;
+                width: calc(100% - 300px);
+                height: 100vh;
+                z-index: -1;
+                overflow: hidden;
+            }
+            .main_image {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                /*min-width: calc(100vw - 150px);
+                min-height: 100vh;*/
+            }
+        }
+    </style>
+    <div class="div_header">
+        <a href="index.html" class="for_phone">
+            <img src="う潮ロゴ単体_top.png" class="header_logo_image">
+        </a>
+
+        <div class="hamburger-menu for_phone">
+            <input type="checkbox" id="menu-btn-check">
+            <label for="menu-btn-check" class="menu-btn">
+                <span></span>
+            </label>
+            <div class="menu-content for_phone">
+                <ul>
+                    <li>
+                        <a href="index.html" class="return">TOP</a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="news.html">News</a>
+                    </li>
+                    <li>
+                        <a href="archives.html">Archives</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header_and_image for_pc">
+            <div class="menu-content for_pc">
+                <ul>
+                    <li>
+                        <a href="index.html" class="return">
+                            <img src="う潮ロゴ単体_top.png" class="header_logo_image">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="news.html">News</a>
+                    </li>
+                    <li>
+                        <a href="archives.html">Archives</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="div_main_image for_pc">
+                <img src="ushiotop.jpg" class="main_image">
+            </div>
+        </div>
+    </div>
+</header>

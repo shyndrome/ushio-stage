@@ -75,17 +75,8 @@ header {
         font-size: 24px;
     }
     
-    .archives_flyer {
-        border-bottom: 2px dotted var(--blue01-color);
-        text-align: center;
-        margin: 20px;
-        padding-bottom: 20px;
-    }
-
-    .flyer {
-        width: 65%;
-        box-shadow: 0 0 1px #444;
-    }
+    
+    
     
     a {
         color: #444;

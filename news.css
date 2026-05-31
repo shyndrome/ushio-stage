@@ -28,6 +28,9 @@ header {
     --blue03-color: #86a6c3;
 }
 
+/*アセット*/
+
+
 /*縦長、スマホ対応*/
 @media only screen and (max-width: 480px) {
     .yokonaga {
@@ -139,10 +142,20 @@ header {
         box-shadow: 0 0 1px #444;
     }
     
-    .iwaiphoto {
+    .imageSingle {
         width: 50vw;
         margin: 8px 15vw;
         box-shadow: 0 0 1px #444;
+    }
+
+    .imageDouble {
+        width: 25vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .imageLeft {
+        display: none;
     }
     
     span {
@@ -400,6 +413,24 @@ header {
     .square2 {
         text-align: center;
     }
+
+    .imageSingle {
+        width: 50vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .imageDouble {
+        width: 25vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .imageLeft {
+        width: 50vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
     
     
     /*メニュー*/
@@ -523,6 +554,24 @@ header {
         left: 25vw;
         position: fixed;
         z-index: -1;
+    }
+
+    .imageSingle {
+        width: 50vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .imageDouble {
+        width: 25vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
+    }
+
+    .imageLeft {
+        width: 50vw;
+        margin: 8px 15vw;
+        box-shadow: 0 0 1px #444;
     }
     
     
