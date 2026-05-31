@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
       <meta charset="UTF-8">
-      <link href="archives.css" rel="stylesheet" type="text/css" media="all">
+      <link href="index.css" rel="stylesheet" type="text/css" media="all">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
     	<script src="index.js"></script>
       <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,9 +16,9 @@
   </head>
   <body>
     <div id="header_fetch_target"></div>
-    
-    <div class="ushiotop pcnaga">
-      <img src="ushiotop.jpg" class="ushiotop">
+
+    <div class="div_main_image_for_phone">
+      <img src="ushiotop.jpg" class="main_image">
     </div>
 
     <div class="contents">
@@ -32,14 +32,14 @@
         .then(data => {
             const container = document.querySelector('.archives_detail');
 
-            data.forEach((post, index) => {
+            data.forEach(item => {
 
               const html = `
                   <div class="archives_article">
-                    <a href="news.html#${item.id}">
-                      <img src="${item.image}" class="archives_image">
+                    <img src="${item.image}" class="archives_image">
+                    <a href="news.html#${item.news_id}">
                       <h3>『${item.title}』</h3>
-                      <p>news.html#${item.DayAndVenue}</p>
+                      <p>${item.dayAndVenue}</p>
                     </a>
                   </div>
                 `
@@ -48,27 +48,6 @@
             });
         });
       </script>
-
-      <div class="archives_flyer">
-        <a href="news.html#20240630"><img src="疾走　本表.jpg" class="flyer">
-        <h3>『疾走』</h3>
-        <p>2024/9/27 - 29　スタジオ空洞</p></a>
-      </div>
-
-    <div class="pckiji">
-      <h1>Archives</h1>
-
-      <div class="archives_flyer">
-        <a href="news.html#20240630"><img src="疾走　本表.jpg" class="flyer">
-        <h3>『疾走』</h3>
-        <p>2024/9/27 - 29　スタジオ空洞</p></a>
-      </div>
-
-      <div class="archives_flyer">
-        <a href="news.html#20230715"><img src="ふうかちゃん表.jpg" class="flyer">
-        <h3>『ふうかちゃん』</h3>
-        <p>2023/9/8 - 10　サブテレニアン</p></a>
-      </div>
     </div>
 
   </body>

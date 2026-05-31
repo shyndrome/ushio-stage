@@ -39,9 +39,9 @@
 
               if (post.Layout == "imageSingle_first"){
                 var html = `
-                    <ul class="newsline" id="news-list">
+                    <ul class="newsline" id="${post.id}">
                       <li>
-                        <h1>${newsLabel}</h1>
+                        ${newsLabel}
                         <p class="date">${post.date}</p>
                         <h3>${post.title}</h3>
 
@@ -57,9 +57,9 @@
               }
               else if (post.Layout == "imageSingle_last"){
                 var html = `
-                    <ul class="newsline" id="news-list">
+                    <ul class="newsline" id="${post.id}">
                       <li>
-                        <h1>${newsLabel}</h1>
+                        ${newsLabel}
                         <p class="date">${post.date}</p>
                         <h3>${newsLabel}${post.title}</h3>
 
@@ -75,9 +75,9 @@
               }
               else if (post.Layout == "imageDouble"){
                 var html = `
-                    <ul class="newsline" id="news-list">
+                    <ul class="newsline" id="${post.id}">
                       <li>
-                        <h1>${newsLabel}</h1>
+                        ${newsLabel}
                         <p class="date">${post.date}</p>
                         <h3>${newsLabel}${post.title}</h3>
 
@@ -95,29 +95,11 @@
                     </ul>
                   `
               }
-              else if (post.Layout == "imageDouble"){
-                var html = `
-                    <ul class="newsline" id="news-list">
-                      <li>
-                        <h1>${newsLabel}</h1>
-                        <p class="date">${post.date}</p>
-                        <h3>${newsLabel}${post.title}</h3>
-
-                        <div class="for_">
-                          <div class="news_contents">
-                            <p>${post.contents}
-                          </p>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  `
-              }
               else {
                 var html = `
-                    <ul class="newsline" id="news-list">
+                    <ul class="newsline" id="${post.id}">
                       <li>
-                        <h1>${newsLabel}</h1>
+                        ${newsLabel}
                         <p class="date">${post.date}</p>
                         <h3>${newsLabel}${post.title}</h3>
 
@@ -135,6 +117,18 @@
                 if(container) container.insertAdjacentHTML('beforeend', html);
             });
         });
+
+        const hash = window.location.hash;
+        
+        if (hash) {
+            const targetElement = document.querySelector(hash);
+            
+            if (targetElement) {
+                setTimeout(() => {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 200);
+            }
+        }
     </script>
 
   </body>

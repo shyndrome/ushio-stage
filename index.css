@@ -341,3 +341,30 @@ p {
 .news_p_inside {
     width: auto;
 }
+
+/*archives.html*/
+.archives_article {
+    border-bottom: 2px dotted var(--blue01-color);
+    text-align: center;
+    margin: 20px;
+    padding-bottom: 20px;
+}
+
+.archives_article a {
+    color: #444;
+    text-decoration: none;
+}
+
+.archives_image {
+    width: auto;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+    box-shadow: 0 0 1px  #444;
+}
+
+/*contact.html*/
+.contact {
+    width: 100%;
+    text-align: center;
+}
