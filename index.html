@@ -33,42 +33,48 @@
       <div class="div_box_parents">
         <div class="div_box_2">
           <h2 class="newstitle for_phone">Topic</h2>
-          <a href="news.html">
+          <a href="news.html#20250113">
             <img src="すいか本チラシ表.jpg" class="next_box_image">
           </a>
         </div>
 
-        <div class="div_box_2 news_box">
-          <h2 class="newstitle">News</h2>
-          <ul id="top-news"></ul>
+        <div class="div_box_2">
+          <h2 class="newstitle for_phone">News</h2>
+          <div class="news_box">
+            <h2 class="newstitle for_pc">News</h2>
+            <ul id="top-news"></ul>
 
-            <script>
-            fetch('news_data.json')
-              .then(res => res.json())
-              .then(data => {
-                const ul = document.getElementById("top-news");
+              <script>
+              fetch('news_data.json')
+                .then(res => res.json())
+                .then(data => {
+                  const ul = document.getElementById("top-news");
 
-                data.slice(0,4).forEach(item => {
-                  const li = document.createElement("li");
-                  li.className = "newsarticle";
+                  data.slice(0,4).forEach((item, index) => {
+                    const li = document.createElement("li");
 
-                  li.innerHTML = `
-                    <p class="date">${item.date}</p>
-                    <h3>
-                      <a href="news.html#${item.id}" class="articlelink">
-                        ${item.title}
-                      </a>
-                    </h3>
-                  `;
+                    if (index === 3) {
+                      li.className = "for_pc";
+                    }
 
-                  ul.appendChild(li);
+                    li.innerHTML = `
+                      <p class="date">${item.date}</p>
+                      <h3>
+                        <a href="news.html#${item.id}" class="articlelink">
+                          ${item.title}
+                        </a>
+                      </h3>
+                    `;
+
+                    ul.appendChild(li);
+                  });
                 });
-              });
-            </script>
+              </script>
 
-          <a href="news.html" class="view_more">
-            もっと見る
-          </a>
+            <a href="news.html" class="view_more">
+              もっと見る
+            </a>
+          </div>
         </div>
       </div>
 

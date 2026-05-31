@@ -17,11 +17,8 @@
   <body>
     <div id="header_fetch_target"></div>
 
-    <div class="div_main_image_for_phone">
-      <img src="ushiotop.jpg" class="main_image">
-    </div>
-
     <div class="contents for_news">
+      <h1 class="for_phone">News</h1>
       <div id="news-detail" class="news_detail">
         <!--fetch-->
       </div>
@@ -35,7 +32,7 @@
 
             data.forEach((post, index) => {
 
-              const newsLabel = (index === 0) ? '<h1>News</h1>' : '';
+              const newsLabel = (index === 0) ? '<h1 class="for_pc">News</h1>' : '';
 
               if (post.Layout == "imageSingle_first"){
                 var html = `
@@ -116,19 +113,68 @@
 
                 if(container) container.insertAdjacentHTML('beforeend', html);
             });
-        });
 
-        const hash = window.location.hash;
-        
-        if (hash) {
-            const targetElement = document.querySelector(hash);
+            // ==========================================
+            // 【完全版】スマホのズレ・1回目飛ばないバグを両方直すコード
+            // ==========================================
+            const hash = window.location.hash;
             
-            if (targetElement) {
-                setTimeout(() => {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 200);
+            if (hash) {
+                const id = hash.replace('#', '');
+                const targetElement = document.getElementById(id);
+                
+                if (targetElement) {
+                    const allImages = container.querySelectorAll('img');
+                    let loadedCount = 0;
+                    
+                    // ジャンプを実行する共通の関数
+                    const doJump = () => {
+                        // 対象要素の「ページ最上部からの絶対的な位置（y座標）」を正確に計算
+                        const rect = targetElement.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        let targetY = rect.top + scrollTop;
+
+                        // 画面横幅が800px未満（スマホ）なら、固定ヘッダーの80px分を最初から引き算する
+                        if (window.innerWidth < 800) {
+                            targetY = targetY - 80;
+                        }
+
+                        // ブラウザの自動ジャンプ機能を完全に上書きして、狙った位置に一瞬で固定する
+                        window.scrollTo({
+                            top: targetY,
+                            behavior: 'auto'
+                        });
+                    };
+
+                    // スマホブラウザが最初の段階で勝手に変な位置にスクロールするのを防ぐため、
+                    // ページの一番上（0, 0）に一瞬強制固定してキープする
+                    window.scrollTo(0, 0);
+
+                    if (allImages.length === 0) {
+                        doJump();
+                    } else {
+                        allImages.forEach(img => {
+                            if (img.complete) {
+                                loadedCount++;
+                                if (loadedCount === allImages.length) {
+                                    // ほんのわずか（0.05秒）だけ待つとスマホの描画バグを完全に回避できます
+                                    setTimeout(doJump, 50);
+                                }
+                            } else {
+                                img.addEventListener('load', () => {
+                                    loadedCount++;
+                                    if (loadedCount === allImages.length) setTimeout(doJump, 50);
+                                });
+                                img.addEventListener('error', () => {
+                                    loadedCount++;
+                                    if (loadedCount === allImages.length) setTimeout(doJump, 50);
+                                });
+                            }
+                        });
+                    }
+                }
             }
-        }
+        });
     </script>
 
   </body>

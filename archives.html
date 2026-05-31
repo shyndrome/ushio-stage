@@ -17,10 +17,6 @@
   <body>
     <div id="header_fetch_target"></div>
 
-    <div class="div_main_image_for_phone">
-      <img src="ushiotop.jpg" class="main_image">
-    </div>
-
     <div class="contents">
       <h1>Archives</h1>
 
@@ -36,7 +32,9 @@
 
               const html = `
                   <div class="archives_article">
-                    <img src="${item.image}" class="archives_image">
+                    <a href="news.html#${item.news_id}">
+                      <img src="${item.image}" class="archives_image">
+                    </a>
                     <a href="news.html#${item.news_id}">
                       <h3>『${item.title}』</h3>
                       <p>${item.dayAndVenue}</p>
