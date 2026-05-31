@@ -9,6 +9,9 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" sizes="any">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
+      <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
       <title>Archives | う潮</title>
   </head>
   <body>
@@ -17,6 +20,40 @@
     <div class="ushiotop pcnaga">
       <img src="ushiotop.jpg" class="ushiotop">
     </div>
+
+    <div class="contents">
+      <h1>Archives</h1>
+
+      <div class="archives_detail" id="archives_detail"></div>
+
+      <script>
+        fetch('archives_data.json')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.querySelector('.archives_detail');
+
+            data.forEach((post, index) => {
+
+              const html = `
+                  <div class="archives_article">
+                    <a href="news.html#${item.id}">
+                      <img src="${item.image}" class="archives_image">
+                      <h3>『${item.title}』</h3>
+                      <p>news.html#${item.DayAndVenue}</p>
+                    </a>
+                  </div>
+                `
+
+                if(container) container.insertAdjacentHTML('beforeend', html);
+            });
+        });
+      </script>
+
+      <div class="archives_flyer">
+        <a href="news.html#20240630"><img src="疾走　本表.jpg" class="flyer">
+        <h3>『疾走』</h3>
+        <p>2024/9/27 - 29　スタジオ空洞</p></a>
+      </div>
 
     <div class="pckiji">
       <h1>Archives</h1>
