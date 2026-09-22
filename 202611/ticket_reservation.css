@@ -1,0 +1,126 @@
+/*ボタン*/
+button {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+}
+
+/*テーブル全体のレイアウト固定*/
+.ticket_reservation_box {
+    margin: auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.ticket_reservation_box tr th, 
+.ticket_reservation_box tr td {
+    padding: 5px;
+    text-align: left;
+    box-sizing: border-box; /* paddingとborderを含めて幅計算する */
+}
+
+/* ★ 全入力要素のボックスモデルを統一 */
+.ticket_selectbox,
+.ticket_textbox_label,
+.ticket_textbox,
+.ticket_textarea {
+    color: #444;
+    box-sizing: border-box; /* 追加 */
+}
+
+/* ★ ラバー（親<label>）と入力欄の幅制御 */
+.ticket_selectbox {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 100%;       /* 幅いっぱいに広げる */
+    min-width: 170px;  /* 最小幅を統一 */
+}
+
+.ticket_selectbox select {
+    width: 100%;       /* stretch から 100% に変更して安全化 */
+    appearance: none;
+    min-width: 170px;
+    height: 2.8em;
+    padding: .4em calc(.8em + 30px) .4em .8em;
+    border: 0.5px solid var(--box-color);
+    border-radius: 3px;
+    background-color: #fff;
+    color: #333333;
+    font-size: 12px;
+    cursor: pointer;
+    box-sizing: border-box; /* 追加 */
+}
+
+.ticket_selectbox::after {
+    position: absolute;
+    right: 15px;
+    width: 10px;
+    height: 7px;
+    background-color: var(--box-color);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    content: '';
+    pointer-events: none;
+}
+
+.ticket_textbox_label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+/* テキストボックスの幅統一 */
+.ticket_textbox {
+    width: 100%;       /* stretch から 100% に変更 */
+    min-width: 170px;
+    height: 2.8em;
+    padding: 0 .8em;
+    border: 0.5px solid var(--box-color);
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+    box-sizing: border-box; /* 追加 */
+}
+
+.ticket_textbox::placeholder {
+    color: #999;
+}
+
+/* テキストエリアの幅統一 */
+.ticket_textarea {
+    width: 100%;       /* stretch から 100% に変更 */
+    min-width: 170px;
+    height: 15em;
+    padding: .4em .8em;
+    border: 0.5px solid var(--box-color);
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.5;
+    resize: none;
+    box-sizing: border-box; /* 追加 */
+}
+
+.ticket_submit {
+    padding: .4em .8em;
+    font-size: 12px;
+    background-color: var(--blue05-color);
+    border-radius: 3px;
+    border: 1px solid var(--blue05-color);
+    cursor: pointer;
+}
+
+.ticket_submit:hover {
+    background-color: #fff;
+    border: 1px solid var(--blue05-color);
+}
+
+@media only screen and (max-width: 799px){
+    .ticket_reservation_box {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 800px){
+    .ticket_reservation_box {
+        width: 90%;
+    }
+}

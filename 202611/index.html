@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <link href="/index.css" rel="stylesheet" type="text/css" media="all">
+      <link href="ticket_reservation.css" rel="stylesheet" type="text/css" media="all">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+      <script src="/index.js"></script>
+      <script src="ticket_reservation.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" sizes="any">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
+      <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
+      <title>Ticket | う潮</title>
+  </head>
+  <body>
+    <div id="header_fetch_target"></div>
+
+    <div class="contents">
+      <h1>Ticket</h1>
+
+      <div class="div_box_single">
+
+        <h2>う潮のひとり芝居<br>『読むほどに孤独、書くほどに軽薄』</h2>
+
+        <form id="reservationForm" onsubmit="return false;">
+        <table class="ticket_reservation_box">
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">公演日時</span>
+            </th>
+            <td>
+                <label class="ticket_selectbox">
+                <select id="datetimeSelect" required>
+                    <option value="">ロード中...</option>
+                </select>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">枚数</span>
+            </th>
+            <td>
+                <label class="ticket_selectbox">            
+                <select id="countSelect" required disabled>
+                    <option value="">-</option>
+                </select>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">合計金額</span>
+            </th>
+            <td>
+                <p id="totalPriceDisplay">0 円</p>
+            </td>
+            </tr> 
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">お支払い方法</span>
+            </th>
+            <td>
+                <label class="ticket_selectbox">
+                <select id="paymentMethodSelect" required>
+                    <option value="">選択</option>
+                    <option value="prepayment">事前決済</option>
+                    <option value="onsite">当日精算</option>
+                </select>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">お名前</span>
+            </th>
+            <td>
+                <label>
+                <input type="text" id="nameInput" class="ticket_textbox" placeholder="山田 太郎" required>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">フリガナ</span>
+            </th>
+            <td>
+                <label>
+                <input type="text" id="kanaInput" class="ticket_textbox" placeholder="ヤマダ タロウ" required>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">メールアドレス</span>
+            </th>
+            <td>
+                <label>
+                <input type="email" id="emailInput" class="ticket_textbox" placeholder="example@example.com" required>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">メールアドレス<br class="for_phone">（確認用）</span>
+            </th>
+            <td>
+                <label>
+                <input type="email" id="emailConfirmInput" class="ticket_textbox" placeholder="example@example.com" required>
+                </label>
+            </td>
+            </tr>
+            <tr>
+            <th>
+                <span class="ticket_textbox_label">備考欄</span>
+            </th>
+            <td>
+                <textarea id="remarksInput" class="ticket_textarea"></textarea>
+            </td>
+            </tr>
+        </table>
+
+        <!-- エラーメッセージ表示エリア -->
+        <div id="errorMessage" style="color: red; text-align: center; margin: 10px 0; display: none;"></div>
+
+        <button type="button" id="submitToConfirmBtn" class="ticket_submit">
+            確認画面へ
+        </button>
+        </form>
+
+        <!-- ===== 確認画面（簡易モーダル） ===== -->
+        <div id="confirmModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999;">
+        <div style="background: #fff; max-width: 500px; margin: 50px auto; padding: 20px; border-radius: 8px;">
+            <h3>予約内容の確認</h3>
+            <p>以下の内容で予約を確定します。よろしいですか？</p>
+            <div id="confirmContent" style="margin: 15px 0; line-height: 1.6;"></div>
+            
+            <div style="text-align: center; display: flex; gap: 10px; justify-content: center;">
+            <button type="button" id="cancelConfirmBtn">修正する</button>
+            <button type="button" id="finalSubmitBtn" class="ticket_submit">予約を確定する</button>
+            </div>
+        </div>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>

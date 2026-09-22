@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+      <meta charset="UTF-8">
+      <link href="/index.css" rel="stylesheet" type="text/css" media="all">
+      <link href="ticket_reservation.css" rel="stylesheet" type="text/css" media="all">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+      <script src="/index.js"></script>
+      <script src="ticket_reservation.js"></script>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" sizes="any">
+      <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
+      <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
+      <title>Reservation Confirmed | う潮</title>
+  </head>
+  <body>
+    <div id="header_fetch_target"></div>
+
+    <div class="contents">
+      <h1>Ticket</h1>
+
+      <div class="div_box_single">
+
+        <h2>う潮のひとり芝居<br>『読むほどに孤独、書くほどに軽薄』<br>ご予約を受け付けました</h2>
+
+        <p>ご入力いただいたメールアドレス宛に予約完了メールを送信いたしました。<br>内容をご確認ください。</p>
+        
+        <div style="background: #f9f9f9; padding: 15px; display: inline-block; margin: 20px 0; border: 1px solid #ccc;">
+        <p style="margin: 0;">受付番号（予約ID）</p>
+        <h3 id="reservationIdDisplay" style="margin: 5px 0 0 0; color: #333;">----</h3>
+        </div>
+
+        <p style="font-size: 0.9em; color: #666;">
+        ※メールが届かない場合は、迷惑メールフォルダをご確認いただくか、劇団までお問い合わせください。
+        </p>
+
+        <a href="index.html" style="display: inline-block; margin-top: 20px; text-decoration: none; padding: 10px 20px; background: #333; color: #fff;">トップページに戻る</a>
+
+      </div>
+
+    </div>
+  </body>
+</html>
