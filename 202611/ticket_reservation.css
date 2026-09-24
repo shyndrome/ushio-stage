@@ -1,6 +1,89 @@
+/* ==========================================
+   ローディング表示 ＆ インジケーター
+   ========================================== */
+
+/* 全面ローディングオーバーレイ */
+.loading_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading_text {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* 3つドットのローディングアニメーション */
+.dots_spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dots_spinner div {
+    width: 12px;
+    height: 12px;
+    background-color: var(--blue05-color, #0066cc);
+    border-radius: 50%;
+    animation: dots_bounce 1.4s infinite ease-in-out both;
+}
+
+.dots_spinner div:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dots_spinner div:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes dots_bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.3;
+    }
+    40% {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+
+.required_mark {
+    color: #d33542;             /* 赤字 */
+    font-size: 9px;          /* 少し小さめにして見やすく */
+    font-weight: bold;
+    margin-right: 4px;          /* 項目名との間の余白 */
+    display: inline-block;
+}
+
+/* ==========================================
+   連打防止（disabled時のスタイル）
+   ========================================== */
+button:disabled,
+.ticket_submit:disabled {
+    background-color: #cccccc !important;
+    border-color: #cccccc !important;
+    color: #666666 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+    pointer-events: none; /* クリックイベントを完全に遮断 */
+}
+
 /*ボタン*/
 button {
     font-family: 'Zen Kaku Gothic New', sans-serif;
+    margin-top: 15px;
 }
 
 /*テーブル全体のレイアウト固定*/
@@ -113,14 +196,65 @@ button {
     border: 1px solid var(--blue05-color);
 }
 
-@media only screen and (max-width: 799px){
-    .ticket_reservation_box {
-        width: 100%;
+@media only screen and (max-width: 599px){
+    /* 1. テーブル構造をブロック要素に変更して横並びを解除 */
+    .ticket_reservation_box,
+    .ticket_reservation_box tbody,
+    .ticket_reservation_box tr,
+    .ticket_reservation_box tr th,
+    .ticket_reservation_box tr td {
+        display: block;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* 2. スマホでの余白と配置の微調整 */
+    .ticket_reservation_box tr {
+        margin-bottom: 12px; /* 項目ごとの間隔を開ける */
+    }
+
+    .ticket_reservation_box tr th {
+        padding: 4px 0;
+        font-size: 13px;
+    }
+
+    .ticket_reservation_box tr td {
+        padding: 2px 0 8px 0;
+    }
+
+    /* 3. スマホ画面に合わせて最小幅を柔軟に縮小 */
+    .ticket_selectbox,
+    .ticket_selectbox select,
+    .ticket_textbox,
+    .ticket_textarea {
+        min-width: 0 !important; /* はみ出し防止のため最小幅の制限を解除 */
+        width: 100% !important;  /* 親要素いっぱいに広げる */
     }
 }
 
-@media only screen and (min-width: 800px){
+@media only screen and (min-width: 600px){
     .ticket_reservation_box {
         width: 90%;
     }
+}
+
+.res_box {
+    background: #f9f9f9; 
+    padding: 15px; 
+    display: inline-block; 
+    margin: 20px 0; 
+    border: 1px solid #ccc;
+}
+
+.res_id {
+    margin: 0;
+}
+
+.a_to_index {
+    display: inline-block; 
+    margin-top: 20px; 
+    text-decoration: none; 
+    padding: 10px 20px; 
+    background: #444; 
+    color: #fff;
 }

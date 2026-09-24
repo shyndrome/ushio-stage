@@ -17,6 +17,15 @@
       <title>Ticket | う潮</title>
   </head>
   <body>
+    <div id="pageLoader" class="loading_overlay">
+        <div class="dots_spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        </div>
+        <div class="loading_text">公演情報を読み込んでいます...</div>
+    </div>
+
     <div id="header_fetch_target"></div>
 
     <div class="contents">
@@ -30,7 +39,7 @@
         <table class="ticket_reservation_box">
             <tr>
             <th>
-                <span class="ticket_textbox_label">公演日時</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">公演日時</span>
             </th>
             <td>
                 <label class="ticket_selectbox">
@@ -42,7 +51,7 @@
             </tr>
             <tr>
             <th>
-                <span class="ticket_textbox_label">枚数</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">枚数</span>
             </th>
             <td>
                 <label class="ticket_selectbox">            
@@ -62,7 +71,7 @@
             </tr> 
             <tr>
             <th>
-                <span class="ticket_textbox_label">お支払い方法</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">お支払い方法</span>
             </th>
             <td>
                 <label class="ticket_selectbox">
@@ -76,7 +85,7 @@
             </tr>
             <tr>
             <th>
-                <span class="ticket_textbox_label">お名前</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">お名前</span>
             </th>
             <td>
                 <label>
@@ -86,7 +95,7 @@
             </tr>
             <tr>
             <th>
-                <span class="ticket_textbox_label">フリガナ</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">フリガナ</span>
             </th>
             <td>
                 <label>
@@ -96,7 +105,7 @@
             </tr>
             <tr>
             <th>
-                <span class="ticket_textbox_label">メールアドレス</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">メールアドレス</span>
             </th>
             <td>
                 <label>
@@ -106,7 +115,7 @@
             </tr>
             <tr>
             <th>
-                <span class="ticket_textbox_label">メールアドレス<br class="for_phone">（確認用）</span>
+                <span class="required_mark">*必須</span><span class="ticket_textbox_label">メールアドレス<br class="for_phone">（確認用）</span>
             </th>
             <td>
                 <label>

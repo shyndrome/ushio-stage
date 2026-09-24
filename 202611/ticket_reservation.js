@@ -3,31 +3,49 @@
 // ==========================================
 
 const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzqycvmQMrM9trQ8T0TXzDYvlxZH-zFZOd5iHLagp5dC77rIEBjxTxX86L_-oyDLLFRog/exec"; // 公開したGASのWebアプリURL
-const TICKET_UNIT_PRICE = 3000; // チケット単価
+const TICKET_UNIT_PRICE = 1; // チケット単価
 
 let fetchedSchedules = [];
 let currentReservationId = null;
 let currentFormData = {}; // グローバル変数として保持
 
 document.addEventListener("DOMContentLoaded", () => {
-  initForm();
-  
-  // イベントリスナー登録
-  document.getElementById("datetimeSelect").addEventListener("change", onDatetimeChange);
-  document.getElementById("countSelect").addEventListener("change", calculateTotal);
-  document.getElementById("submitToConfirmBtn").addEventListener("click", handleStepToConfirm);
-  document.getElementById("finalSubmitBtn").addEventListener("click", handleFinalSubmit);
-  
-  // モーダルキャンセルボタンがある場合のイベントリスナー
-  const cancelBtn = document.getElementById("cancelConfirmBtn");
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", hideConfirmScreen);
+  // datetimeSelect が存在する場合のみ (index.html の場合のみ) 実行
+  const datetimeSelect = document.getElementById("datetimeSelect");
+
+  if (datetimeSelect) {
+    // 1. フォームの初期化（GASから公演日時と残席数を取得）
+    initForm();
+
+    // 2. イベントリスナー登録（要素が存在するかチェックして安全に登録）
+    datetimeSelect.addEventListener("change", onDatetimeChange);
+
+    const countSelect = document.getElementById("countSelect");
+    if (countSelect) {
+      countSelect.addEventListener("change", calculateTotal);
+    }
+
+    const submitToConfirmBtn = document.getElementById("submitToConfirmBtn");
+    if (submitToConfirmBtn) {
+      submitToConfirmBtn.addEventListener("click", handleStepToConfirm);
+    }
+
+    const finalSubmitBtn = document.getElementById("finalSubmitBtn");
+    if (finalSubmitBtn) {
+      finalSubmitBtn.addEventListener("click", handleFinalSubmit);
+    }
+
+    const cancelConfirmBtn = document.getElementById("cancelConfirmBtn");
+    if (cancelConfirmBtn) {
+      cancelConfirmBtn.addEventListener("click", hideConfirmScreen);
+    }
   }
 });
 
 // 1. フォーム初期化・日時一覧取得
 async function initForm() {
   const datetimeSelect = document.getElementById("datetimeSelect");
+  const pageLoader = document.getElementById("pageLoader");
   
   try {
     const res = await fetch(GAS_API_URL);
@@ -41,12 +59,11 @@ async function initForm() {
         const option = document.createElement("option");
         option.value = item.datetime;
         
-        // 選択不可（残席0 または 受付終了など）の場合のラベル表示
         if (item.isSelectable) {
           option.textContent = `${item.datetime}`;
         } else {
           option.textContent = `${item.datetime} (${item.statusText || "受付不可"})`;
-          option.disabled = true; // 選択できないように無効化
+          option.disabled = true;
         }
         
         datetimeSelect.appendChild(option);
@@ -56,6 +73,11 @@ async function initForm() {
     }
   } catch (err) {
     alert("公演日時の取得に失敗しました。画面を再読み込みしてください。");
+  } finally {
+    // ★ 読み込み完了後にドットのローディング表示を消す
+    if (pageLoader) {
+      pageLoader.style.display = "none";
+    }
   }
 }
 
@@ -147,10 +169,10 @@ async function handleStepToConfirm() {
     return;
   }
 
-  // 二重送信防止
+  // ★ 連打防止 ＆ ボタンテキスト変更
   const submitBtn = document.getElementById("submitToConfirmBtn");
   submitBtn.disabled = true;
-  submitBtn.textContent = "席を確保中...";
+  submitBtn.textContent = "お席を確保中...";
 
   // フォーム入力値をグローバル変数に保存
   currentFormData = { datetime, count, paymentMethod, paymentMethodText, name, kana, email, remarks };
@@ -180,8 +202,101 @@ async function handleStepToConfirm() {
     console.error("仮予約通信エラー:", err);
     alert("通信エラーが発生しました。もう一度お試しください。");
   } finally {
+    // ★ 処理完了後にボタンを元に戻す
     submitBtn.disabled = false;
     submitBtn.textContent = "確認画面へ";
+  }
+}
+
+// 4. 確認画面での最終確定処理（「予約確定」ボタン押下時）
+async function handleFinalSubmit() {
+  const finalBtn = document.getElementById("finalSubmitBtn");
+  const cancelBtn = document.getElementById("cancelConfirmBtn");
+
+  // ★ 連打防止（確定ボタンだけでなく戻るボタンも無効化）
+  finalBtn.disabled = true;
+  if (cancelBtn) cancelBtn.disabled = true;
+  finalBtn.textContent = "処理中（そのままお待ちください）...";
+
+  const totalAmount = currentFormData.count * TICKET_UNIT_PRICE;
+
+  if (currentFormData.paymentMethod === "onsite") {
+    // --- 【当日精算】 ---
+    try {
+      const res = await fetch(GAS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          mode: "confirm_onsite",
+          reservationId: currentReservationId,
+          datetime: currentFormData.datetime,
+          count: currentFormData.count,
+          email: currentFormData.email,
+          name: currentFormData.name,
+          totalAmount: totalAmount
+        }),
+        redirect: "follow"
+      });
+
+      const result = await res.json();
+
+      if (result.status === "success") {
+        window.location.href = `confirmed.html?res_id=${currentReservationId}`;
+      } else {
+        alert("エラー: " + result.message);
+        finalBtn.disabled = false;
+        if (cancelBtn) cancelBtn.disabled = false;
+        finalBtn.textContent = "予約を確定する";
+      }
+    } catch (err) {
+      console.error("当日精算通信エラー:", err);
+      alert("通信エラーが発生しました。コンソールログをご確認ください。");
+      finalBtn.disabled = false;
+      if (cancelBtn) cancelBtn.disabled = false;
+      finalBtn.textContent = "予約を確定する";
+    }
+  } else if (currentFormData.paymentMethod === "prepayment") {
+    // --- 【事前決済 (Square)】 ---
+    try {
+      const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+      const redirectUrl = baseUrl + "confirmed.html";
+
+      const res = await fetch(GAS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          mode: "create_square_checkout",
+          reservationId: currentReservationId,
+          datetime: currentFormData.datetime,
+          count: currentFormData.count,
+          unitPrice: TICKET_UNIT_PRICE,
+          redirectUrl: redirectUrl
+        }),
+        redirect: "follow"
+      });
+
+      const result = await res.json();
+
+      if (result.status === "success" && result.checkoutUrl) {
+        // Square決済ページヘリダイレクト（ボタンは無効化したまま遷移）
+        window.location.href = result.checkoutUrl;
+      } else {
+        alert("決済URLの生成に失敗しました: " + result.message);
+        finalBtn.disabled = false;
+        if (cancelBtn) cancelBtn.disabled = false;
+        finalBtn.textContent = "予約を確定する";
+      }
+    } catch (err) {
+      console.error("Square決済通信エラー:", err);
+      alert("通信エラーが発生しました。コンソールログをご確認ください。");
+      finalBtn.disabled = false;
+      if (cancelBtn) cancelBtn.disabled = false;
+      finalBtn.textContent = "予約を確定する";
+    }
   }
 }
 

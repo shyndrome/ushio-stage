@@ -6,7 +6,6 @@
       <link href="ticket_reservation.css" rel="stylesheet" type="text/css" media="all">
       <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
       <script src="/index.js"></script>
-      <script src="ticket_reservation.js"></script>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap" rel="stylesheet">
@@ -14,7 +13,7 @@
       <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" sizes="any">
       <link rel="icon" href="https://www.ushio-stage.com/う潮アイコン.png" type="image/png">
       <link rel="apple-touch-icon" href="https://www.ushio-stage.com/う潮アイコン.png">
-      <title>Reservation Confirmed | う潮</title>
+      <title>Ticket | う潮</title>
   </head>
   <body>
     <div id="header_fetch_target"></div>
@@ -28,19 +27,65 @@
 
         <p>ご入力いただいたメールアドレス宛に予約完了メールを送信いたしました。<br>内容をご確認ください。</p>
         
-        <div style="background: #f9f9f9; padding: 15px; display: inline-block; margin: 20px 0; border: 1px solid #ccc;">
-        <p style="margin: 0;">受付番号（予約ID）</p>
+        <div class="res_box">
+        <p class="res_id">受付番号（予約ID）</p>
         <h3 id="reservationIdDisplay" style="margin: 5px 0 0 0; color: #333;">----</h3>
         </div>
 
-        <p style="font-size: 0.9em; color: #666;">
+        <p>
         ※メールが届かない場合は、迷惑メールフォルダをご確認いただくか、劇団までお問い合わせください。
         </p>
 
-        <a href="index.html" style="display: inline-block; margin-top: 20px; text-decoration: none; padding: 10px 20px; background: #333; color: #fff;">トップページに戻る</a>
+        <a href="../index.html" class="a_to_index">トップページに戻る</a>
 
       </div>
 
     </div>
+    <script>
+        // GASのAPI URL（main.jsと同じものを指定）
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzqycvmQMrM9trQ8T0TXzDYvlxZH-zFZOd5iHLagp5dC77rIEBjxTxX86L_-oyDLLFRog/exec";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            // 1. URLパラメータから res_id または reservationId を取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const resId = urlParams.get('res_id') || urlParams.get('reservationId');
+            
+            const resDisplay = document.getElementById('reservationIdDisplay');
+            const statusMsg = document.getElementById('statusMessage');
+
+            // 2. 予約IDが存在すれば画面に表示
+            if (resId) {
+            if (resDisplay) {
+                resDisplay.textContent = resId; // ★ここで id="reservationIdDisplay" に書き込みます
+            }
+
+            // 3. 事前決済（Square）等から戻ってきた場合のステータス確定処理（GAS呼び出し）
+            try {
+                const res = await fetch(GAS_API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+                body: JSON.stringify({
+                    mode: "confirm_prepayment",
+                    reservationId: resId
+                }),
+                redirect: "follow"
+                });
+
+                const result = await res.json();
+                if (result.status === "success" && statusMsg) {
+                statusMsg.textContent = "ご予約と決済が完了いたしました。ご来場を心よりお待ちしております。";
+                }
+            } catch (err) {
+                console.error("確定リクエストエラー:", err);
+            }
+            } else {
+            if (statusMsg) {
+                statusMsg.textContent = "ご予約受付が完了いたしました。";
+            }
+            }
+        });
+    </script>
   </body>
 </html>
