@@ -321,11 +321,52 @@ function showConfirmScreen(data) {
   }
 }
 
-function hideConfirmScreen() {
+// 確認モーダルで「修正する」ボタンが押された時の処理
+async function hideConfirmScreen() {
+  const cancelBtn = document.getElementById("cancelConfirmBtn");
+  const finalBtn = document.getElementById("finalSubmitBtn");
+
+  // 連打防止
+  if (cancelBtn) {
+    cancelBtn.disabled = true;
+    cancelBtn.textContent = "ロード中...";
+  }
+  if (finalBtn) finalBtn.disabled = true;
+
+  // 仮予約IDが存在する場合、GASへ解除をリクエストして「完了を待つ」
+  if (currentReservationId) {
+    try {
+      await fetch(GAS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+          mode: "cancel_hold",
+          reservationId: currentReservationId
+        }),
+        redirect: "follow"
+      });
+    } catch (err) {
+      console.error("仮予約解除エラー:", err);
+    } finally {
+      // 次の送信時に古いIDを引き継がないようリセット
+      currentReservationId = null;
+    }
+  }
+
+  // モーダルを閉じる
   const confirmModal = document.getElementById("confirmModal");
   if (confirmModal) {
     confirmModal.style.display = "none";
   }
+
+  // ボタンの状態を元に戻す
+  if (cancelBtn) {
+    cancelBtn.disabled = false;
+    cancelBtn.textContent = "修正する";
+  }
+  if (finalBtn) finalBtn.disabled = false;
 }
 
 // 4. 確認画面での最終確定処理（「予約確定」ボタン押下時）
