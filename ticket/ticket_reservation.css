@@ -59,6 +59,10 @@
     }
 }
 
+#referrerDisplay {
+    text-align: right;
+}
+
 .required_mark {
     color: #d33542;             /* 赤字 */
     font-size: 9px;          /* 少し小さめにして見やすく */

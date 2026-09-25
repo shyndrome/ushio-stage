@@ -2,14 +2,41 @@
 // main.js
 // ==========================================
 
+const ACTOR_MAP = {
+  "000": "ながおあいり",
+  "001": "下村りさ子",
+  "002": "牧凌平",
+  "003": "葉純勇太",
+  "004": "久保田結",
+  "005": "鈴木俊輔",
+  "006": "関美穂",
+  "007": "黄木日菜子",
+  // 必要な分だけIDと名前を追加
+};
+
 const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzqycvmQMrM9trQ8T0TXzDYvlxZH-zFZOd5iHLagp5dC77rIEBjxTxX86L_-oyDLLFRog/exec"; // 公開したGASのWebアプリURL
 const TICKET_UNIT_PRICE = 1; // チケット単価
 
 let fetchedSchedules = [];
 let currentReservationId = null;
 let currentFormData = {}; // グローバル変数として保持
+let currentReferrerName = "劇団";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // URLパラメータから ?ref=xxx を取得
+  const urlParams = new URLSearchParams(window.location.search);
+  const refCode = urlParams.get('ref');
+
+  // マッピング表にコードが存在すればその名前、無ければ「劇団扱い」
+  if (refCode && ACTOR_MAP[refCode]) {
+    currentReferrerName = ACTOR_MAP[refCode];
+  }
+
+  const referrerDisplay = document.getElementById("referrerDisplay");
+  if (referrerDisplay) {
+    referrerDisplay.textContent = `（${currentReferrerName} 扱い）`;
+  }
+  
   // datetimeSelect が存在する場合のみ (index.html の場合のみ) 実行
   const datetimeSelect = document.getElementById("datetimeSelect");
 
@@ -175,7 +202,7 @@ async function handleStepToConfirm() {
   submitBtn.textContent = "お席を確保中...";
 
   // フォーム入力値をグローバル変数に保存
-  currentFormData = { datetime, count, paymentMethod, paymentMethodText, name, kana, email, remarks };
+  currentFormData = { datetime, count, paymentMethod, paymentMethodText, name, kana, email, remarks, referrer: currentReferrerName };
 
   try {
     const res = await fetch(GAS_API_URL, {
